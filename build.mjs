@@ -206,7 +206,7 @@ pages['location.html'] = { title: 'Location', eyebrow: 'Find us', h1: 'Easy to r
 pages['offers.html'] = { title: 'Offers', eyebrow: 'Book direct', h1: 'Your easy days<br>start here.', lede: 'Book direct for our best available offers and a stay made a little easier.', blocks: [['cards', { title: 'Direct booking benefits', items: [['Best available direct offer', 'See current offers in our booking engine.'], ['Direct assistance from the hotel', 'Talk to the team that looks after your stay.'], ['Flexible options when available', 'Ask us about changes before you book.']] }], ['prose', { text: ['[List one current promotion here. Confirm terms before using “Best Rate Guarantee” or “Free Cancellation”.]'] }]] };
 pages['faq.html'] = { title: 'FAQ & Policies', eyebrow: 'Help', h1: 'Good to know.', lede: 'Quick answers before you arrive.', blocks: [['faq', { title: 'Questions', items: [
   ['Is the shuttle free?', 'Yes. The complimentary shuttle runs between the hotel and the city center (Baan Manthana Hotel). Please reserve your seat in advance. <a href="shuttle.html">See times</a>.'],
-  ['What time is check-in and check-out?', '[Check-in / check-out times]'],
+  ['What time is check-in and check-out?', 'Check-in is from 2:00 PM and check-out is by 12:00 PM (noon). Late check-out is available until 6:00 PM for a 50% fee.'],
   ['Is breakfast included?', '[Breakfast policy by rate]'],
   ['Can I cancel or change my booking?', '[Cancellation and change policy]'],
   ['Are children welcome?', '[Child policy, extra beds, ages]'],
