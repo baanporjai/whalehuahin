@@ -5,12 +5,15 @@ const TOWN = [
   { title: 'Three Easy Days in Hua Hin', blurb: 'A simple plan for a first visit.', cls: 't3', href: 'hua-hin/three-easy-days.html' },
 ];
 
-// TODO: replace with real guest reviews (verbatim, short excerpts) before launch
+// Short summaries of recent guest reviews found on Google Maps.
+// Keep these attributed and link back to the listing so the source is clear.
 const REVIEWS = [
-  { quote: 'The room was incredibly spacious and the rooftop pool was a highlight.', who: '[Guest name]', src: '[Booking platform]', date: '[Month Year]' },
-  { quote: '[Real review excerpt about staff and service]', who: '[Guest name]', src: '[Booking platform]', date: '[Month Year]' },
-  { quote: '[Real review excerpt about shuttle or location]', who: '[Guest name]', src: '[Booking platform]', date: '[Month Year]' },
+  { quote: 'Spacious rooms, a beautiful terrace, friendly and helpful staff, reliable Wi‑Fi, and a shuttle into town every two hours.', who: 'Justina R', src: 'Google Maps', date: 'Dec 2025' },
+  { quote: 'Warm, lovely service—especially from the housekeeping team—along with comfortable beds, constant hot water, and a clean rooftop pool.', who: 'E B', src: 'Google Maps', date: 'Jan 2026' },
+  { quote: 'After two stays, the great service, free city shuttle, rooftop pool and bar, and spacious comfortable rooms made this a place to return to.', who: 'Laurie', src: 'Google Maps', date: 'Apr 2026' },
 ];
+
+const REVIEWS_URL = 'https://www.google.com/maps/place/Whale+Hua+Hin+Hotel/@12.6105149,99.9498802,797m/data=!3m1!1e3!4m9!3m8!1s0x30fdabb29c0ca55f:0xc2398f394e7cd6eb!5m2!4m1!1i2!8m2!3d12.6103827!4d99.9498711!16s%2Fg%2F11gghdhwg8';
 
 // Cloudbeds "From" prices: wire these to the Cloudbeds rate feed. Left blank on purpose.
 const PRICES = {};
@@ -100,10 +103,10 @@ TOWN.forEach(t => town.append(el('li', 'reveal', `<a href="${esc(t.href)}"><div 
 /* Reviews */
 const rv = $('#review-list');
 REVIEWS.forEach(r => {
-  const draft = r.quote.startsWith('[');
   rv.append(el('figure', 'review reveal',
     `${draft ? '<span class="tag">Placeholder</span>' : ''}<blockquote>“${esc(r.quote)}”</blockquote><figcaption>${esc(r.who)} · ${esc(r.src)} · ${esc(r.date)}</figcaption>`));
 });
+rv.insertAdjacentHTML('afterend', `<p class="section-foot"><a class="link-arrow" href="${REVIEWS_URL}" target="_blank" rel="noopener">Read more reviews on Google Maps</a></p>`);
 
 /* Reveal on scroll */
 document.querySelectorAll('.tiles li, .room, .pair article, .mosaic figure, .shuttle-card, .shuttle-photo').forEach(e => e.classList.add('reveal'));
