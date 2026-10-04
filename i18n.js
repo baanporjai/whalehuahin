@@ -1,0 +1,345 @@
+/* Client-side translation: EN (source) / TH / 中文 / RU.
+   Matches the English text on the page against the dictionary below, so pages stay plain English HTML.
+   Text with no entry (hotel names, [placeholders]) is left as written.
+   TODO: native speaker review before launch. For SEO, publish real /th/ /zh/ /ru/ pages once content is final. */
+(() => {
+  const LANGS = [['en', 'EN'], ['th', 'ไทย'], ['zh', '中文'], ['ru', 'RU']];
+  const FONTS = {
+    th: ['Noto Sans Thai', 'Noto+Sans+Thai:wght@400;600;800'],
+    zh: ['Noto Sans SC', 'Noto+Sans+SC:wght@400;600;800'],
+    ru: ['Onest', 'Onest:wght@400;600;800'],
+  };
+
+  // [English, ไทย, 中文, Русский]  — "\n" in a translation becomes a line break
+  const D = [
+    // nav, header, misc
+    ['Stay', 'เข้าพัก', '住宿', 'Проживание'],
+    ['Experiences', 'ประสบการณ์', '体验', 'Впечатления'],
+    ['Hua Hin', 'หัวหิน', '华欣', 'Хуахин'],
+    ['Offers', 'โปรโมชัน', '优惠', 'Предложения'],
+    ['About', 'เกี่ยวกับเรา', '关于我们', 'О нас'],
+    ['Book now', 'จองเลย', '立即预订', 'Забронировать'],
+    ['Language', 'ภาษา', '语言', 'Язык'],
+    ['Main', 'เมนูหลัก', '主导航', 'Главное меню'],
+    ['Call', 'โทร', '致电', 'Позвонить'],
+    // hero + booking
+    ['Made for Easy Days.', 'เกิดมาเพื่อ\nวันสบายๆ', '为轻松时光\n而生。', 'Создан для\nлёгких дней.'],
+    ['Spacious stays, rooftop moments and an easy way to enjoy Hua Hin.', 'ห้องพักกว้างขวาง ช่วงเวลาบนดาดฟ้า และวิธีเพลิดเพลินกับหัวหินแบบสบายๆ', '宽敞的客房、屋顶时光，轻松畅游华欣。', 'Просторные номера, моменты на крыше и лёгкий способ насладиться Хуахином.'],
+    ['Explore Whale', 'สำรวจ Whale', '探索 Whale', 'Узнать о Whale'],
+    ['Check Availability', 'ตรวจสอบห้องว่าง', '查询空房', 'Проверить наличие'],
+    ['Check-in', 'เช็กอิน', '入住', 'Заезд'],
+    ['Check-out', 'เช็กเอาต์', '退房', 'Выезд'],
+    ['Guests', 'ผู้เข้าพัก', '住客', 'Гости'],
+    ['Promo code', 'รหัสโปรโมชัน', '优惠码', 'Промокод'],
+    ['Optional', 'ไม่บังคับ', '选填', 'Необязательно'],
+    ['Check rooms', 'ดูห้องว่าง', '查看客房', 'Смотреть номера'],
+    ['Close booking panel', 'ปิดแผงการจอง', '关闭预订面板', 'Закрыть панель бронирования'],
+    ['1 Guest', 'ผู้เข้าพัก 1 คน', '1位住客', '1 гость'],
+    ['2 Guests', 'ผู้เข้าพัก 2 คน', '2位住客', '2 гостя'],
+    ['3 Guests', 'ผู้เข้าพัก 3 คน', '3位住客', '3 гостя'],
+    ['4 Guests', 'ผู้เข้าพัก 4 คน', '4位住客', '4 гостя'],
+    ['5 Guests', 'ผู้เข้าพัก 5 คน', '5位住客', '5 гостей'],
+    ['6 Guests', 'ผู้เข้าพัก 6 คน', '6位住客', '6 гостей'],
+    // four reasons
+    ['Everything you need for an easy Hua Hin stay.', 'ทุกอย่างที่ต้องการสำหรับการพักหัวหินแบบสบายๆ', '轻松入住华欣所需的一切。', 'Всё необходимое для лёгкого отдыха в Хуахине.'],
+    ['Rooftop Pool', 'สระว่ายน้ำบนดาดฟ้า', '屋顶泳池', 'Бассейн на крыше'],
+    ['Swim, slide and slow down above Hua Hin.', 'ว่ายน้ำ เล่นสไลเดอร์ และผ่อนคลายเหนือหัวหิน', '在华欣上空畅游、滑水道、放慢脚步。', 'Плавайте, катайтесь с горки и замедлитесь над Хуахином.'],
+    ['Spacious Rooms', 'ห้องพักกว้างขวาง', '宽敞客房', 'Просторные номера'],
+    ['More room to settle in, stretch out and stay awhile.', 'พื้นที่เหลือเฟือให้พักผ่อน เหยียดตัว และอยู่ได้นานขึ้น', '更大的空间，让您安顿、舒展，多住一会儿。', 'Больше места, чтобы расположиться, расслабиться и задержаться.'],
+    ['Massage and quiet moments without leaving the hotel.', 'นวดผ่อนคลายและช่วงเวลาเงียบสงบโดยไม่ต้องออกจากโรงแรม', '无需离开酒店，即可享受按摩与宁静时刻。', 'Массаж и тихие минуты, не выходя из отеля.'],
+    ['Free Shuttle', 'รถรับส่งฟรี', '免费接驳车', 'Бесплатный трансфер'],
+    ['An easier way to reach the beach and selected Hua Hin stops.', 'วิธีไปชายหาดและจุดเด่นในหัวหินที่สะดวกขึ้น', '前往海滩及华欣精选站点的便捷方式。', 'Удобный способ добраться до пляжа и выбранных мест Хуахина.'],
+    // story
+    ['A little more room for easy days.', 'พื้นที่เพิ่มอีกนิด\nสำหรับวันสบายๆ', '多一点空间，\n享受轻松时光。', 'Чуть больше простора\nдля лёгких дней.'],
+    ['Whale Hua Hin is made for days that feel unhurried. Spacious rooms, rooftop swims, sunset drinks and thoughtful comforts give you more ways to enjoy your stay—whether you’re here for a weekend or staying a little longer.', 'Whale Hua Hin สร้างมาเพื่อวันที่ไม่ต้องเร่งรีบ ห้องพักกว้างขวาง การว่ายน้ำบนดาดฟ้า เครื่องดื่มยามอาทิตย์ตก และความใส่ใจในรายละเอียด ช่วยให้คุณเพลิดเพลินกับการเข้าพักได้มากขึ้น ไม่ว่าจะมาสุดสัปดาห์หรืออยู่ยาวขึ้นอีกหน่อย', 'Whale Hua Hin 为从容不迫的日子而生。宽敞的客房、屋顶泳池、日落美酒和体贴的细节，让您的入住更添乐趣——无论是周末小住，还是多停留几日。', 'Whale Hua Hin создан для неспешных дней. Просторные номера, плавание на крыше, закатные напитки и забота о мелочах дарят больше поводов насладиться отдыхом — приехали ли вы на выходные или чуть дольше.'],
+    ['Discover our story', 'ค้นพบเรื่องราวของเรา', '探索我们的故事', 'Узнать нашу историю'],
+    // stay
+    ['Stay your way', 'เข้าพักในแบบคุณ', '随心入住', 'Отдых по-вашему'],
+    ['Room to make yourself at home.', 'พื้นที่ให้คุณรู้สึก\nเหมือนอยู่บ้าน', '宾至如归的空间。', 'Простор, где чувствуешь\nсебя как дома.'],
+    ['From easy weekend stays to private Jacuzzi moments and two-bedroom space for everyone.', 'ตั้งแต่ทริปสุดสัปดาห์สบายๆ ไปจนถึงช่วงเวลาส่วนตัวในจากุซซี่ และห้องสองห้องนอนสำหรับทุกคน', '从轻松的周末小住，到私享按摩浴缸时光，再到适合大家同住的两卧套房。', 'От лёгких выходных до уединённых минут в джакузи и двухкомнатных апартаментов для всей компании.'],
+    ['A little time for two.', 'เวลาเล็กๆ สำหรับสองคน', '属于两个人的小小时光。', 'Немного времени для двоих.'],
+    ['A spacious room with a private Jacuzzi made for slower moments together.', 'ห้องกว้างขวางพร้อมจากุซซี่ส่วนตัว สำหรับช่วงเวลาช้าๆ ด้วยกัน', '宽敞客房配私人按摩浴缸，为两人放慢脚步而设。', 'Просторный номер с личным джакузи для неспешных моментов вдвоём.'],
+    ['From', 'เริ่มต้น', '起价', 'От'],
+    ['View Jacuzzi Deluxe', 'ดูห้อง Jacuzzi Deluxe', '查看 Jacuzzi Deluxe', 'Смотреть Jacuzzi Deluxe'],
+    ['More light, open views and a little distance from the everyday.', 'แสงสว่างมากขึ้น วิวโปร่ง และระยะห่างจากชีวิตประจำวันเล็กน้อย', '更多光线、开阔视野，与日常稍稍拉开距离。', 'Больше света, открытые виды и немного дистанции от повседневности.'],
+    ['View Room', 'ดูห้องพัก', '查看客房', 'Смотреть номер'],
+    ['Everything you need for a comfortable Hua Hin stay.', 'ทุกอย่างที่ต้องการสำหรับการพักหัวหินอย่างสบาย', '舒适入住华欣所需的一切。', 'Всё необходимое для комфортного отдыха в Хуахине.'],
+    ['Together, with room to breathe.', 'อยู่ด้วยกัน พร้อมพื้นที่ให้หายใจ', '相聚一堂，也有喘息的空间。', 'Вместе, но с достаточным пространством.'],
+    ['A two-bedroom suite made for families and friends.', 'ห้องสวีทสองห้องนอนสำหรับครอบครัวและเพื่อนฝูง', '专为家人和朋友打造的两卧套房。', 'Двухкомнатные апартаменты для семей и друзей.'],
+    ['View Two-Bedroom Suite', 'ดูห้องสวีทสองห้องนอน', '查看两卧套房', 'Смотреть двухкомнатные апартаменты'],
+    ['Explore all rooms', 'ดูห้องพักทั้งหมด', '浏览全部客房', 'Все номера'],
+    // pool
+    ['Above Hua Hin', 'เหนือหัวหิน', '华欣之上', 'Над Хуахином'],
+    ['Swim. Slide. Slow down.', 'ว่ายน้ำ เล่นสไลเดอร์\nผ่อนคลาย', '畅游，滑行，\n慢下来。', 'Плавайте. Катайтесь.\nНе спешите.'],
+    ['Take in the view, cool off in the rooftop pool or add a little fun with a ride down the pool slide.', 'ชมวิว คลายร้อนในสระบนดาดฟ้า หรือเพิ่มความสนุกด้วยการไถลสไลเดอร์', '欣赏美景，在屋顶泳池清凉一下，或乘水滑梯增添一点乐趣。', 'Любуйтесь видом, освежитесь в бассейне на крыше или добавьте веселья спуском с горки.'],
+    ['Explore the Rooftop Pool', 'สำรวจสระว่ายน้ำบนดาดฟ้า', '探索屋顶泳池', 'Узнать о бассейне на крыше'],
+    // shuttle (home + page)
+    ['Getting around', 'การเดินทาง', '出行', 'Как добраться'],
+    ['We’ll get you there.', 'เราพาคุณ\nไปถึงที่หมาย', '我们送您抵达。', 'Мы вас довезём.'],
+    ['Enjoy complimentary shuttle service between Whale Hua Hin, the beach and selected stops around town.', 'บริการรถรับส่งฟรีระหว่าง Whale Hua Hin ชายหาด และจุดที่เลือกไว้รอบเมือง', '免费接驳车往返 Whale Hua Hin、海滩及市区精选站点。', 'Бесплатный трансфер между Whale Hua Hin, пляжем и отдельными остановками в городе.'],
+    ['Complimentary shuttle service between Whale Hua Hin, the beach and selected stops around town.', 'บริการรถรับส่งฟรีระหว่าง Whale Hua Hin ชายหาด และจุดที่เลือกไว้รอบเมือง', '免费接驳车往返 Whale Hua Hin、海滩及市区精选站点。', 'Бесплатный трансфер между Whale Hua Hin, пляжем и отдельными остановками в городе.'],
+    ['Advance reservation may be required.', 'อาจต้องจองล่วงหน้า', '可能需要提前预约。', 'Может потребоваться предварительная запись.'],
+    ['View Shuttle Times', 'ดูเวลารถรับส่ง', '查看接驳车时刻', 'Расписание трансфера'],
+    ['See our location', 'ดูที่ตั้งของเรา', '查看我们的位置', 'Как нас найти'],
+    ['Stop', 'จุดจอด', '站点', 'Остановка'],
+    ['Service', 'เวลาให้บริการ', '服务时间', 'Время работы'],
+    ['Free shuttle stops and service hours', 'จุดจอดรถรับส่งฟรีและเวลาให้บริการ', '免费接驳车站点及服务时间', 'Остановки и часы работы бесплатного трансфера'],
+    ['Hua Hin Beach', 'ชายหาดหัวหิน', '华欣海滩', 'Пляж Хуахина'],
+    ['Night Market', 'ตลาดกลางคืน', '夜市', 'Ночной рынок'],
+    ['Hua Hin Town Centre', 'ใจกลางเมืองหัวหิน', '华欣市中心', 'Центр Хуахина'],
+    ['Selected stops on request', 'จุดอื่นตามที่ร้องขอ', '可按需前往的精选站点', 'Отдельные остановки по запросу'],
+    ['Every hour', 'ทุกชั่วโมง', '每小时一班', 'Каждый час'],
+    ['Evening runs', 'รอบเย็น', '晚间班次', 'Вечерние рейсы'],
+    ['Every 2 hours', 'ทุก 2 ชั่วโมง', '每2小时一班', 'Каждые 2 часа'],
+    ['Ask at the front desk', 'สอบถามที่แผนกต้อนรับ', '请咨询前台', 'Уточняйте на стойке регистрации'],
+    ['Ask at the front desk, or message us on LINE.', 'สอบถามที่แผนกต้อนรับ หรือส่งข้อความหาเราทาง LINE', '请咨询前台，或通过 LINE 联系我们。', 'Обратитесь на стойку регистрации или напишите нам в LINE.'],
+    ['Running now ·', 'กำลังให้บริการ ·', '运行中 ·', 'Сейчас курсирует ·'],
+    ['Next service starts', 'รอบถัดไปเริ่ม', '下一班开始于', 'Следующий рейс в'],
+    ['Shuttle times.', 'เวลารถรับส่ง', '接驳车时刻。', 'Расписание трансфера.'],
+    ['Pick a stop to see when the shuttle leaves the hotel. Times are shown in local time.', 'เลือกจุดจอดเพื่อดูเวลาที่รถออกจากโรงแรม เวลาทั้งหมดเป็นเวลาท้องถิ่น', '选择站点，查看接驳车从酒店出发的时间。时间均为当地时间。', 'Выберите остановку, чтобы увидеть, когда трансфер отправляется от отеля. Время указано местное.'],
+    ['Shuttle stops', 'จุดจอดรถรับส่ง', '接驳车站点', 'Остановки трансфера'],
+    ['How to ride.', 'วิธีใช้บริการ', '乘车指南', 'Как пользоваться'],
+    ['Reserve', 'จองล่วงหน้า', '预约', 'Запись'],
+    ['Meet at the lobby', 'พบกันที่ล็อบบี้', '大堂集合', 'Встреча в лобби'],
+    ['Be at the front entrance a few minutes before departure.', 'มารอที่ทางเข้าด้านหน้าก่อนเวลาออกไม่กี่นาที', '请在发车前几分钟到达正门。', 'Подойдите к главному входу за несколько минут до отправления.'],
+    ['Ride & return', 'ขึ้นรถและเดินทางกลับ', '乘车与返程', 'Поездка и возвращение'],
+    ['Check the last return time at your stop before you head out.', 'ตรวจสอบเวลากลับรอบสุดท้ายที่จุดจอดก่อนออกเดินทาง', '出发前请确认该站点的末班返程时间。', 'Перед выходом уточните время последнего обратного рейса.'],
+    ['Beach first, or town?', 'ไปหาดก่อน หรือเข้าเมืองดี', '先去海滩，还是逛市区？', 'Сначала пляж или город?'],
+    ['Questions about timing or a special stop? We’re glad to help.', 'มีคำถามเรื่องเวลาหรือจุดพิเศษ? ยินดีช่วยเหลือ', '对时间或特殊站点有疑问？我们乐意协助。', 'Вопросы о времени или особой остановке? Мы будем рады помочь.'],
+    ['Leaves hotel', 'ออกจากโรงแรม', '酒店发车', 'Отправление от отеля'],
+    ['Next', 'ถัดไป', '下一班', 'Следующий'],
+    // bar
+    ['Sunset, served', 'ซันเซ็ตพร้อมเสิร์ฟ', '日落美酒', 'Закат подан'],
+    ['Sunset looks good from here.', 'พระอาทิตย์ตกดิน\nสวยที่สุดจากตรงนี้', '从这里看日落，\n格外好看。', 'Отсюда закат\nвыглядит лучше.'],
+    ['Settle in for drinks, easy bites and evenings above the city.', 'นั่งจิบเครื่องดื่ม ทานของว่างเบาๆ และใช้ค่ำคืนเหนือเมือง', '来点饮品和小食，在城市上空度过惬意夜晚。', 'Устраивайтесь с напитками и лёгкими закусками — вечера над городом.'],
+    ['Open daily · 5 PM–10 PM', 'เปิดทุกวัน · 17:00–22:00', '每天营业 · 17:00–22:00', 'Ежедневно · 17:00–22:00'],
+    ['Meet you at the rooftop', 'เจอกันบนดาดฟ้า', '屋顶见', 'Встретимся на крыше'],
+    ['Rooftop Bar', 'บาร์ดาดฟ้า', '屋顶酒吧', 'Бар на крыше'],
+    // well retreat + breakfast
+    ['Time for yourself', 'เวลาของคุณ', '属于自己的时间', 'Время для себя'],
+    ['Slow down. You’re here.', 'ช้าลงหน่อย คุณมาถึงแล้ว', '慢下来，您已经到了。', 'Не спешите. Вы уже здесь.'],
+    ['Relax with a thoughtful massage and a quieter moment above Hua Hin.', 'ผ่อนคลายกับการนวดที่ใส่ใจ และช่วงเวลาสงบเหนือหัวหิน', '享受用心的按摩，在华欣上空度过宁静时刻。', 'Расслабьтесь на вдумчивом массаже и проведите тихие минуты над Хуахином.'],
+    ['Discover Well Retreat', 'ค้นพบ Well Retreat', '探索 Well Retreat', 'Узнать о Well Retreat'],
+    ['Book a treatment', 'จองทรีตเมนต์', '预约护理', 'Записаться на процедуру'],
+    ['Mornings at Whale', 'เช้าที่ Whale', 'Whale 的清晨', 'Утро в Whale'],
+    ['Start easy.', 'เริ่มวันแบบสบายๆ', '轻松开启新一天。', 'Начните день легко.'],
+    ['Breakfast favourites, fresh flavours and nowhere you need to rush to.', 'อาหารเช้าสุดโปรด รสชาติสดใหม่ และไม่ต้องรีบไปไหน', '经典早餐、新鲜风味，无需匆忙赶往任何地方。', 'Любимые блюда на завтрак, свежие вкусы и никакой спешки.'],
+    ['Explore Dining', 'สำรวจร้านอาหาร', '探索餐饮', 'Узнать о питании'],
+    ['Dining', 'ห้องอาหาร', '餐饮', 'Питание'],
+    // play
+    ['A little more to do', 'ยังมีอะไรให้ทำอีก', '更多乐趣', 'Чем ещё заняться'],
+    ['Play a little. Stay a little longer.', 'เล่นสนุกอีกนิด อยู่ต่ออีกหน่อย', '玩一玩，多住一会儿。', 'Поиграйте. Задержитесь подольше.'],
+    ['Movie nights, a friendly round of pool or something different at the archery range.', 'ค่ำคืนดูหนัง เกมพูลกันเองสนุกๆ หรือลองสิ่งใหม่ที่สนามยิงธนู', '电影之夜、轻松来一局台球，或在射箭场尝试点不一样的。', 'Вечера кино, дружеская партия в бильярд или что-нибудь необычное на стрельбище из лука.'],
+    ['Discover Play & Unwind', 'ค้นพบ Play & Unwind', '探索 Play & Unwind', 'Узнать о Play & Unwind'],
+    ['Theater Room', 'ห้องฉายภาพยนตร์', '影音室', 'Кинозал'],
+    ['Sit back and make it movie night.', 'นั่งสบายๆ แล้วเปลี่ยนให้เป็นคืนดูหนัง', '靠坐下来，开启电影之夜。', 'Устраивайтесь поудобнее — сегодня кино.'],
+    ['Pool Table', 'โต๊ะพูล', '台球桌', 'Бильярд'],
+    ['A little friendly competition.', 'แข่งกันเบาๆ แบบเป็นกันเอง', '友好的小小较量。', 'Дружеское соревнование.'],
+    ['Archery', 'ยิงธนู', '射箭', 'Стрельба из лука'],
+    ['Take aim and try something different.', 'เล็งให้แม่นแล้วลองสิ่งใหม่', '瞄准目标，尝试点新鲜的。', 'Прицельтесь и попробуйте что-то новое.'],
+    // hua hin
+    ['Step out', 'ออกไปเที่ยว', '走出去', 'Выходите в город'],
+    ['Hello, Hua Hin', 'สวัสดี หัวหิน', '你好，华欣', 'Здравствуй, Хуахин'],
+    ['Hello, Hua Hin.', 'สวัสดี หัวหิน', '你好，华欣。', 'Здравствуй, Хуахин.'],
+    ['Beaches, markets, local food and easy days by the sea—discover more of Hua Hin from Whale.', 'ชายหาด ตลาด อาหารท้องถิ่น และวันสบายๆ ริมทะเล ค้นพบหัวหินให้มากขึ้นจาก Whale', '海滩、市集、地道美食和海边的轻松日子——从 Whale 出发，发现更多华欣。', 'Пляжи, рынки, местная кухня и лёгкие дни у моря — откройте Хуахин с Whale.'],
+    ['Where to Eat in Hua Hin', 'กินที่ไหนดีในหัวหิน', '华欣哪里吃', 'Где поесть в Хуахине'],
+    ['Seafood, noodles and sunset tables.', 'ซีฟู้ด ก๋วยเตี๋ยว และโต๊ะชมพระอาทิตย์ตก', '海鲜、面条和日落餐桌。', 'Морепродукты, лапша и столики на закате.'],
+    ['Markets After Sunset', 'ตลาดหลังพระอาทิตย์ตก', '日落后的市集', 'Рынки после заката'],
+    ['Street food, crafts and slow strolls.', 'สตรีทฟู้ด งานฝีมือ และเดินเล่นช้าๆ', '街头小吃、手工艺品和悠闲漫步。', 'Уличная еда, ремёсла и неспешные прогулки.'],
+    ['Three Easy Days in Hua Hin', 'สามวันสบายๆ ในหัวหิน', '华欣轻松三日游', 'Три лёгких дня в Хуахине'],
+    ['A simple plan for a first visit.', 'แผนง่ายๆ สำหรับการมาครั้งแรก', '首次到访的简单行程。', 'Простой план для первой поездки.'],
+    ['Explore Hua Hin', 'สำรวจหัวหิน', '探索华欣', 'Узнать о Хуахине'],
+    ['Hua Hin Guide', 'คู่มือหัวหิน', '华欣指南', 'Путеводитель по Хуахину'],
+    ['Read guide', 'อ่านคู่มือ', '阅读指南', 'Читать'],
+    ['Getting there is easy with the free shuttle.', 'ไปได้ง่ายๆ ด้วยรถรับส่งฟรี', '乘坐免费接驳车，前往十分便捷。', 'Добраться легко на бесплатном трансфере.'],
+    // reviews
+    ['Good days, according to our guests.', 'วันดีๆ ตามคำบอกเล่า\nของแขกของเรา', '住客眼中的\n美好时光。', 'Хорошие дни\nглазами наших гостей.'],
+    ['“The room was incredibly spacious and the rooftop pool was a highlight.”', '“ห้องกว้างมากๆ และสระว่ายน้ำบนดาดฟ้าคือไฮไลต์เลย”', '“客房非常宽敞，屋顶泳池是一大亮点。”', '«Номер был невероятно просторным, а бассейн на крыше стал настоящим украшением».'],
+    // final cta
+    ['Your easy days start here.', 'วันสบายๆ ของคุณ\nเริ่มต้นที่นี่', '轻松时光，\n从这里开始。', 'Ваши лёгкие дни\nначинаются здесь.'],
+    ['Book direct for our best available offers and a stay made a little easier.', 'จองตรงเพื่อรับข้อเสนอที่ดีที่สุดและการเข้าพักที่สบายขึ้นอีกนิด', '直接预订，享受我们当前最优惠的价格，让入住更轻松一点。', 'Бронируйте напрямую — лучшие доступные предложения и ещё более лёгкий отдых.'],
+    ['Book your stay', 'จองที่พักของคุณ', '预订您的住宿', 'Забронировать'],
+    ['View offers', 'ดูโปรโมชัน', '查看优惠', 'Посмотреть предложения'],
+    ['Best available direct offer', 'ข้อเสนอจองตรงที่ดีที่สุด', '当前最优直订优惠', 'Лучшее доступное прямое предложение'],
+    ['Direct assistance from the hotel', 'ความช่วยเหลือโดยตรงจากโรงแรม', '酒店直接协助', 'Прямая помощь от отеля'],
+    ['Flexible options when available', 'ตัวเลือกที่ยืดหยุ่นเมื่อมีให้', '提供时的灵活选择', 'Гибкие условия, когда это возможно'],
+    ['Your easy days start here. Book direct for our best available offers.', 'วันสบายๆ ของคุณเริ่มต้นที่นี่ จองตรงเพื่อรับข้อเสนอที่ดีที่สุดของเรา', '轻松时光，从这里开始。直接预订，享受我们当前最优惠的价格。', 'Ваши лёгкие дни начинаются здесь. Бронируйте напрямую — лучшие доступные предложения.'],
+    // footer
+    ['All Rooms', 'ห้องพักทั้งหมด', '全部客房', 'Все номера'],
+    ['Two-Bedroom Suite', 'สวีทสองห้องนอน', '两卧套房', 'Двухкомнатные апартаменты'],
+    ['Cloudbeds Booking', 'จองผ่านระบบ Cloudbeds', 'Cloudbeds 预订', 'Бронирование Cloudbeds'],
+    ['Explore', 'สำรวจ', '探索', 'Узнать больше'],
+    ['Help', 'ช่วยเหลือ', '帮助', 'Помощь'],
+    ['Location', 'ที่ตั้ง', '位置', 'Расположение'],
+    ['Shuttle Times', 'เวลารถรับส่ง', '接驳车时刻', 'Расписание трансфера'],
+    ['FAQ & Policies', 'คำถามที่พบบ่อยและนโยบาย', '常见问题与政策', 'Вопросы и правила'],
+    ['Contact', 'ติดต่อ', '联系我们', 'Контакты'],
+    ['Connect', 'ติดตามเรา', '关注我们', 'Мы в сети'],
+    ['Privacy Policy', 'นโยบายความเป็นส่วนตัว', '隐私政策', 'Политика конфиденциальности'],
+    ['Terms & Conditions', 'ข้อกำหนดและเงื่อนไข', '条款与条件', 'Условия использования'],
+    ['Cookie Settings', 'ตั้งค่าคุกกี้', 'Cookie 设置', 'Настройки cookie'],
+    ['Home', 'หน้าแรก', '首页', 'Главная'],
+    ['© {y} Whale Hua Hin. All rights reserved.', '© {y} Whale Hua Hin สงวนลิขสิทธิ์', '© {y} Whale Hua Hin 版权所有。', '© {y} Whale Hua Hin. Все права защищены.'],
+    // rooms
+    ['Rooms & Suites', 'ห้องพักและสวีท', '客房与套房', 'Номера и апартаменты'],
+    ['Room details', 'รายละเอียดห้อง', '客房详情', 'О номере'],
+    ['Size', 'ขนาด', '面积', 'Площадь'], ['Bed', 'เตียง', '床型', 'Кровать'], ['Sleeps', 'รองรับ', '可住人数', 'Вместимость'], ['View', 'วิว', '景观', 'Вид'],
+    ['An easy place to land.', 'ที่พักที่ง่ายและสบาย', '轻松落脚之地。', 'Место, где легко почувствовать себя как дома.'],
+    ['A comfortable base for a weekend by the sea, with the rooftop pool and shuttle just a few steps away.', 'ฐานพักสบายๆ สำหรับสุดสัปดาห์ริมทะเล ใกล้สระบนดาดฟ้าและรถรับส่งเพียงไม่กี่ก้าว', '适合海边周末小住的舒适据点，屋顶泳池和接驳车近在咫尺。', 'Уютная база для выходных у моря: бассейн на крыше и трансфер в нескольких шагах.'],
+    ['Higher up, lighter inside.', 'สูงขึ้น สว่างขึ้น', '更高的楼层，更明亮的室内。', 'Выше и светлее.'],
+    ['Set on a higher floor, with more light and open views to settle into.', 'อยู่บนชั้นสูง แสงสว่างมากขึ้น พร้อมวิวโปร่งให้เพลิดเพลิน', '位于较高楼层，光线更充足，视野开阔。', 'Расположен на верхнем этаже: больше света и открытые виды.'],
+    ['A spacious room with a private Jacuzzi.', 'ห้องกว้างขวางพร้อมจากุซซี่ส่วนตัว', '配私人按摩浴缸的宽敞客房。', 'Просторный номер с личным джакузи.'],
+    ['Made for slower moments together: a spacious room with a private Jacuzzi of your own.', 'สำหรับช่วงเวลาช้าๆ ด้วยกัน ห้องกว้างขวางพร้อมจากุซซี่ส่วนตัว', '为两人放慢脚步而设：宽敞客房，配专属私人按摩浴缸。', 'Для неспешных моментов вдвоём: просторный номер с собственным джакузи.'],
+    ['Two bedrooms, one easy stay.', 'สองห้องนอน หนึ่งการพักที่สบาย', '两间卧室，一次轻松入住。', 'Две спальни — один лёгкий отдых.'],
+    ['A two-bedroom suite with a Jacuzzi, made for families and friends travelling together.', 'ห้องสวีทสองห้องนอนพร้อมจากุซซี่ สำหรับครอบครัวและเพื่อนที่เดินทางด้วยกัน', '配按摩浴缸的两卧套房，专为结伴出行的家人和朋友打造。', 'Двухкомнатные апартаменты с джакузи для семей и друзей, путешествующих вместе.'],
+    ['Rates are shown live in our booking engine, so you always see the current price for your dates.', 'ราคาแสดงแบบเรียลไทม์ในระบบจอง คุณจึงเห็นราคาปัจจุบันตามวันที่เลือกเสมอ', '价格在预订系统中实时显示，您可随时看到所选日期的当前价格。', 'Цены отображаются в системе бронирования в реальном времени — вы всегда видите актуальную стоимость на ваши даты.'],
+    // experiences
+    ['Good to know', 'ควรทราบ', '温馨提示', 'Полезно знать'],
+    ['Good to know.', 'ควรทราบ', '温馨提示', 'Полезно знать'],
+    ['Swim, slide and slow down above Hua Hin.', 'ว่ายน้ำ เล่นสไลเดอร์ และผ่อนคลายเหนือหัวหิน', '在华欣上空畅游、滑水道、放慢脚步。', 'Плавайте, катайтесь с горки и замедлитесь над Хуахином.'],
+    ['Hours', 'เวลาเปิด', '营业时间', 'Часы работы'], ['Slide', 'สไลเดอร์', '滑水道', 'Горка'], ['Towels', 'ผ้าเช็ดตัว', '毛巾', 'Полотенца'],
+    ['Treatments', 'ทรีตเมนต์', '护理项目', 'Процедуры'], ['Treatment menu', 'เมนูทรีตเมนต์', '护理菜单', 'Меню процедур'], ['Opening hours', 'เวลาทำการ', '营业时间', 'Часы работы'],
+    // about / location / offers / faq / contact / legal
+    ['About Whale', 'เกี่ยวกับ Whale', '关于 Whale', 'О Whale'],
+    ['Our Story', 'เรื่องราวของเรา', '我们的故事', 'Наша история'],
+    ['Whale Hua Hin is made for days that feel unhurried.', 'Whale Hua Hin สร้างมาเพื่อวันที่ไม่ต้องเร่งรีบ', 'Whale Hua Hin 为从容不迫的日子而生。', 'Whale Hua Hin создан для неспешных дней.'],
+    ['Spacious rooms, rooftop swims, sunset drinks and thoughtful comforts give you more ways to enjoy your stay—whether you’re here for a weekend or staying a little longer.', 'ห้องพักกว้างขวาง การว่ายน้ำบนดาดฟ้า เครื่องดื่มยามอาทิตย์ตก และความใส่ใจในรายละเอียด ช่วยให้คุณเพลิดเพลินกับการเข้าพักได้มากขึ้น ไม่ว่าจะมาสุดสัปดาห์หรืออยู่ยาวขึ้นอีกหน่อย', '宽敞的客房、屋顶泳池、日落美酒和体贴的细节，让您的入住更添乐趣——无论是周末小住，还是多停留几日。', 'Просторные номера, плавание на крыше, закатные напитки и забота о мелочах дарят больше поводов насладиться отдыхом — приехали ли вы на выходные или чуть дольше.'],
+    ['Find us', 'พบเรา', '找到我们', 'Как нас найти'],
+    ['Easy to reach, easy to leave.', 'เดินทางมาง่าย\nไปไหนก็สะดวก', '来去都轻松。', 'Легко добраться,\nлегко уехать.'],
+    ['Whale Hua Hin, with a free shuttle to the beach and selected stops around town.', 'Whale Hua Hin พร้อมรถรับส่งฟรีไปชายหาดและจุดที่เลือกไว้รอบเมือง', 'Whale Hua Hin 提供前往海滩及市区精选站点的免费接驳车。', 'Whale Hua Hin с бесплатным трансфером до пляжа и отдельных остановок в городе.'],
+    ['Getting here', 'การเดินทางมาที่นี่', '如何到达', 'Как добраться'],
+    ['Address', 'ที่อยู่', '地址', 'Адрес'], ['From Hua Hin town', 'จากตัวเมืองหัวหิน', '从华欣市区', 'От центра Хуахина'], ['From Bangkok', 'จากกรุงเทพฯ', '从曼谷', 'От Бангкока'], ['Parking', 'ที่จอดรถ', '停车', 'Парковка'],
+    ['Use the free shuttle to the beach and around town.', 'ใช้รถรับส่งฟรีไปชายหาดและรอบเมือง', '免费接驳车可前往海滩及市区各处。', 'Пользуйтесь бесплатным трансфером до пляжа и по городу.'],
+    ['Book direct', 'จองตรง', '直接预订', 'Бронируйте напрямую'],
+    ['Direct booking benefits', 'สิทธิประโยชน์เมื่อจองตรง', '直订优惠', 'Преимущества прямого бронирования'],
+    ['See current offers in our booking engine.', 'ดูข้อเสนอปัจจุบันในระบบจองของเรา', '请在预订系统中查看当前优惠。', 'Актуальные предложения смотрите в нашей системе бронирования.'],
+    ['Talk to the team that looks after your stay.', 'พูดคุยกับทีมที่ดูแลการเข้าพักของคุณ', '直接联系照顾您住宿的团队。', 'Общайтесь с командой, которая заботится о вашем пребывании.'],
+    ['Ask us about changes before you book.', 'สอบถามเรื่องการเปลี่ยนแปลงก่อนจอง', '预订前可向我们咨询变更事宜。', 'Спросите нас об изменениях до бронирования.'],
+    ['Quick answers before you arrive.', 'คำตอบสั้นๆ ก่อนคุณมาถึง', '抵达前的快速解答。', 'Краткие ответы перед приездом.'],
+    ['Questions', 'คำถาม', '常见问题', 'Вопросы'],
+    ['Is the shuttle free?', 'รถรับส่งฟรีหรือไม่?', '接驳车免费吗？', 'Трансфер бесплатный?'],
+    ['Yes, complimentary shuttle service runs between the hotel, the beach and selected stops. Advance reservation may be required.', 'ฟรี มีรถรับส่งระหว่างโรงแรม ชายหาด และจุดที่เลือกไว้ อาจต้องจองล่วงหน้า', '是的，免费接驳车往返酒店、海滩及精选站点。可能需要提前预约。', 'Да, бесплатный трансфер курсирует между отелем, пляжем и отдельными остановками. Может потребоваться предварительная запись.'],
+    ['See times', 'ดูเวลา', '查看时刻', 'Посмотреть расписание'],
+    ['Say hello', 'ทักทายเรา', '打个招呼', 'Поздоровайтесь'],
+    ['We’re glad to help.', 'ยินดีช่วยเหลือ', '我们乐意协助。', 'Мы будем рады помочь.'],
+    ['Questions about your stay, the shuttle or a special occasion? Reach the team directly.', 'มีคำถามเรื่องการเข้าพัก รถรับส่ง หรือโอกาสพิเศษ? ติดต่อทีมงานได้โดยตรง', '对住宿、接驳车或特别场合有疑问？欢迎直接联系团队。', 'Вопросы о проживании, трансфере или особом случае? Свяжитесь с командой напрямую.'],
+    ['Reach us', 'ช่องทางติดต่อ', '联系方式', 'Связаться с нами'],
+    ['Phone', 'โทรศัพท์', '电话', 'Телефон'], ['Email', 'อีเมล', '邮箱', 'Эл. почта'], ['Front desk', 'แผนกต้อนรับ', '前台', 'Стойка регистрации'],
+    ['Legal', 'ข้อมูลทางกฎหมาย', '法律信息', 'Правовая информация'],
+    ['How Whale Hua Hin handles your personal data.', 'วิธีที่ Whale Hua Hin จัดการข้อมูลส่วนบุคคลของคุณ', 'Whale Hua Hin 如何处理您的个人数据。', 'Как Whale Hua Hin обрабатывает ваши персональные данные.'],
+    ['The terms that apply to bookings and stays.', 'ข้อกำหนดที่ใช้กับการจองและการเข้าพัก', '适用于预订和住宿的条款。', 'Условия, применимые к бронированиям и проживанию.'],
+    // page <title> / meta
+    ['Free Shuttle', 'รถรับส่งฟรี', '免费接驳车', 'Бесплатный трансфер'],
+    ['Spacious Rooms, Rooftop Pool & Free Shuttle', 'ห้องพักกว้างขวาง สระบนดาดฟ้า และรถรับส่งฟรี', '宽敞客房、屋顶泳池与免费接驳车', 'Просторные номера, бассейн на крыше и бесплатный трансфер'],
+    ['Stay at Whale Hua Hin with spacious rooms, a rooftop pool and slide, rooftop bar, massage, free shuttle and rooms for couples, families and friends.', 'เข้าพักที่ Whale Hua Hin ห้องพักกว้างขวาง สระบนดาดฟ้าพร้อมสไลเดอร์ บาร์ดาดฟ้า นวดผ่อนคลาย รถรับส่งฟรี และห้องสำหรับคู่รัก ครอบครัว และเพื่อนฝูง', '入住 Whale Hua Hin：宽敞客房、屋顶泳池与滑水道、屋顶酒吧、按摩、免费接驳车，以及适合情侣、家庭和朋友的房型。', 'Отдыхайте в Whale Hua Hin: просторные номера, бассейн с горкой на крыше, бар на крыше, массаж, бесплатный трансфер и номера для пар, семей и друзей.'],
+  ];
+
+  const maps = { th: new Map(), zh: new Map(), ru: new Map() };
+  const IDX = { th: 1, zh: 2, ru: 3 };
+  const norm = s => s.replace(/\s+/g, ' ').trim();
+  for (const row of D) for (const l in maps) maps[l].set(norm(row[0]), row[IDX[l]]);
+
+  const lookup = (lang, raw) => {
+    const m = norm(raw).match(/\b(20\d\d)\b/);
+    const t = maps[lang].get(m ? norm(raw).replace(m[1], '{y}') : norm(raw));
+    return t ? (m ? t.replace('{y}', m[1]) : t) : null;
+  };
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG', 'TEXTAREA']);
+  const recs = new WeakMap();
+  let lang = 'en', busy = false;
+
+  function leaf(el) {
+    let r = recs.get(el);
+    if (r && el.innerHTML !== r.cur) r = null; // content changed by page script
+    if (!r) {
+      const text = [...el.childNodes].filter(n => n.nodeType === 3).map(n => n.nodeValue).join(' ');
+      r = { html: el.innerHTML, text, cur: el.innerHTML };
+    }
+    const t = lang === 'en' ? null : lookup(lang, r.text);
+    r.cur = t ? esc(t).replace(/\n/g, '<br>') : r.html;
+    if (el.innerHTML !== r.cur) el.innerHTML = r.cur;
+    recs.set(el, r);
+  }
+  function textNode(n) {
+    let r = recs.get(n);
+    if (r && n.nodeValue !== r.cur) r = null;
+    if (!r) r = { orig: n.nodeValue, cur: n.nodeValue };
+    const t = lang === 'en' ? null : lookup(lang, r.orig);
+    r.cur = t ? n.nodeValue.replace(n.nodeValue.trim(), t.replace(/\n/g, ' ')) : r.orig;
+    if (n.nodeValue !== r.cur) n.nodeValue = r.cur;
+    recs.set(n, r);
+  }
+  function walk(el) {
+    if (SKIP.has(el.tagName.toUpperCase())) return;
+    const kids = [...el.childNodes];
+    if (kids.every(n => n.nodeType === 3 || (n.nodeType === 1 && n.tagName === 'BR'))) {
+      if (norm(kids.map(n => n.nodeValue || '').join(' '))) leaf(el);
+      return;
+    }
+    for (const n of kids) {
+      if (n.nodeType === 1) walk(n);
+      else if (n.nodeType === 3 && n.nodeValue.trim()) textNode(n);
+    }
+  }
+  const attrRecs = new WeakMap();
+  function attrs() {
+    document.querySelectorAll('[aria-label],[placeholder]').forEach(el => {
+      const r = attrRecs.get(el) || {};
+      for (const a of ['aria-label', 'placeholder']) {
+        if (!el.hasAttribute(a)) continue;
+        if (r[a] == null) r[a] = el.getAttribute(a);
+        el.setAttribute(a, (lang !== 'en' && lookup(lang, r[a])) || r[a]);
+      }
+      attrRecs.set(el, r);
+    });
+  }
+  let titleOrig, descOrig;
+  function head() {
+    const desc = document.querySelector('meta[name="description"]');
+    titleOrig = titleOrig ?? document.title; descOrig = descOrig ?? desc?.content;
+    if (lang === 'en') { document.title = titleOrig; if (desc) desc.content = descOrig; return; }
+    document.title = titleOrig.split(' | ').map(p => lookup(lang, p) || p).join(' | ');
+    if (desc) desc.content = lookup(lang, descOrig) || descOrig;
+  }
+  function fonts() {
+    const f = FONTS[lang];
+    if (!f || document.getElementById('i18n-font-' + lang)) return;
+    const l = document.createElement('link');
+    l.id = 'i18n-font-' + lang; l.rel = 'stylesheet';
+    l.href = `https://fonts.googleapis.com/css2?family=${f[1]}&display=swap`;
+    document.head.append(l);
+  }
+
+  const obs = new MutationObserver(() => { if (!busy) requestAnimationFrame(apply); });
+  function apply() {
+    busy = true; obs.disconnect();
+    document.documentElement.lang = lang;
+    walk(document.body); attrs(); head();
+    document.querySelectorAll('.lang select').forEach(s => { s.value = lang; });
+    busy = false;
+    if (lang !== 'en') obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  function setLang(l) {
+    lang = LANGS.some(x => x[0] === l) ? l : 'en';
+    try { localStorage.setItem('wh-lang', lang); } catch (e) {}
+    fonts(); apply();
+  }
+
+  // language selectors: build on every page (inject into header if missing)
+  const header = document.querySelector('.header-end');
+  if (header && !header.querySelector('.lang')) {
+    const lb = document.createElement('label');
+    lb.className = 'lang'; lb.innerHTML = '<span class="sr-only">Language</span><select aria-label="Language"></select>';
+    header.prepend(lb);
+  }
+  document.querySelectorAll('.lang select').forEach(s => {
+    s.innerHTML = LANGS.map(([c, n]) => `<option value="${c}">${n}</option>`).join('');
+    s.addEventListener('change', () => setLang(s.value));
+  });
+
+  let start = 'en';
+  try { start = new URLSearchParams(location.search).get('lang') || localStorage.getItem('wh-lang') || 'en'; } catch (e) {}
+  window.setLang = setLang;
+  setLang(start);
+})();

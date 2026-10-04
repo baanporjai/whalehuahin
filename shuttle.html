@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Shuttle | Whale Hua Hin</title>
+<meta name="description" content="Complimentary shuttle from Whale Hua Hin to the beach, the night market and selected stops around Hua Hin. See stops, times and how to reserve.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-inner">
+
+<header class="site-header scrolled">
+  <a class="brand" href="index.html" aria-label="Whale Hua Hin — home">
+    <svg viewBox="0 0 48 28" width="34" height="20" aria-hidden="true"><path d="M2 16c6 0 8-8 16-8 7 0 8 6 14 6 4 0 5-4 9-4 2 0 5 1 7 3-2 9-9 14-19 14C13 27 4 24 2 16Z" fill="currentColor"/><circle cx="14" cy="17" r="1.6" fill="var(--paper)"/></svg>
+    <span>WHALE <b>HUA HIN</b></span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="index.html#stay">Stay</a>
+    <a href="index.html#experiences">Experiences</a>
+    <a href="index.html#hua-hin">Hua Hin</a>
+    <a href="index.html#offers">Offers</a>
+    <a href="index.html#story">About</a>
+  </nav>
+  <div class="header-end">
+    <a class="btn btn-aqua btn-sm" href="index.html#book">Book now</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="page-hero-in">
+      <p class="eyebrow">Getting around</p>
+      <h1 class="h-display">We’ll get<br>you there.</h1>
+      <p class="lede">Complimentary shuttle service between Whale Hua Hin, the beach and selected stops around town.</p>
+      <p class="note" id="reserve-note"></p>
+    </div>
+  </section>
+
+  <section class="section times" id="times">
+    <header class="section-head">
+      <h2 class="h-section">Shuttle times.</h2>
+      <p class="lede">Pick a stop to see when the shuttle leaves the hotel. Times are shown in local time.</p>
+    </header>
+    <div class="route-tabs" role="tablist" aria-label="Shuttle stops" id="tabs"></div>
+    <div class="route-panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <section class="section how" id="how">
+    <h2 class="h-section">How to ride.</h2>
+    <ol class="steps">
+      <li><h3>Reserve</h3><p id="reserve-how"></p></li>
+      <li><h3>Meet at the lobby</h3><p>Be at the front entrance a few minutes before departure.</p></li>
+      <li><h3>Ride &amp; return</h3><p>Check the last return time at your stop before you head out.</p></li>
+    </ol>
+  </section>
+
+  <section class="final final-sm">
+    <div class="final-copy">
+      <h2 class="h-display">Beach first,<br>or town?</h2>
+      <p>Questions about timing or a special stop? We’re glad to help.</p>
+      <div class="cta-row">
+        <a class="btn btn-aqua" href="index.html#book">Book your stay</a>
+        <a class="btn btn-ghost" href="location.html">See our location</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="foot-base">
+    <p>Whale Hua Hin · [Hotel address], Hua Hin, Thailand<br>[Phone] · [Email]</p>
+    <p class="foot-legal"><a href="index.html">Home</a> <a href="privacy.html">Privacy Policy</a> <a href="terms.html">Terms &amp; Conditions</a></p>
+    <p class="copy">© 2026 Whale Hua Hin. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="sticky-bar">
+  <a href="tel:+66000000000">Call</a>
+  <a href="https://line.me/R/ti/p/REPLACE" rel="noopener">LINE</a>
+  <a class="btn btn-aqua" href="index.html#book">Book now</a>
+</div>
+
+<script src="shuttle-data.js"></script>
+<script src="shuttle.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>
