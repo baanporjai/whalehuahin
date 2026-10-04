@@ -39,7 +39,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 const form = $('#book');
 const iso = d => d.toISOString().slice(0, 10);
 const today = new Date(), tomorrow = new Date(Date.now() + 864e5);
-const ci = form.elements.checkin, co = form.elements.checkout;
+const ci = form.elements.checkIn, co = form.elements.checkOut;
 ci.min = iso(today); co.min = iso(tomorrow);
 ci.addEventListener('change', () => {
   const next = new Date(new Date(ci.value).getTime() + 864e5);

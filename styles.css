@@ -253,8 +253,6 @@ p{margin:0 0 1em}
 .photo-band .media{aspect-ratio:21/9;border-radius:24px}
 .bus-band .media{aspect-ratio:16/8}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
-.gallery img:nth-child(5n+1){grid-column:span 2;aspect-ratio:auto;height:100%}
 .map-img{width:100%;border-radius:24px;background:#fff}
 .info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:32px}
 .info-cards article{background:#fff;border-radius:22px;padding:26px}
@@ -335,7 +333,6 @@ p{margin:0 0 1em}
   .mosaic figure,.mosaic figure:first-child{grid-row:auto;aspect-ratio:16/10}
   .foot-cols{grid-template-columns:1fr 1fr}
   .gallery{grid-template-columns:1fr 1fr}
-  .gallery img:nth-child(5n+1){grid-column:span 2;aspect-ratio:16/10}
   .photo-band .media{aspect-ratio:4/3}
   .spec div{flex-direction:column;gap:2px}
   .page-hero{padding-top:110px}
@@ -368,9 +365,7 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .page-hero .eyebrow{margin-bottom:.8em}
 .section.prose{margin-left:max(var(--gut),calc((100vw - var(--max))/2));margin-right:auto;padding-inline:0}
 .gallery{grid-auto-flow:dense}
-.gallery img:nth-child(5n+1){grid-column:auto;grid-row:auto;aspect-ratio:4/3;height:auto}
-.gallery img:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;height:100%}
-@media (max-width:720px){.gallery img:first-child{grid-row:auto;aspect-ratio:16/10}.section.prose{margin-left:0;padding-inline:var(--gut)}}
+@media (max-width:720px){.section.prose{margin-left:0;padding-inline:var(--gut)}}
 
 /* Logo */
 .brand-logo{height:52px;width:auto;display:block}
@@ -379,3 +374,45 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .site-header.scrolled .logo-color{display:block}
 .foot-logo{height:64px;width:auto;margin:0 auto 36px;max-width:var(--max);display:block;margin-left:max(0px,calc((100vw - var(--max))/2 - var(--gut)))}
 @media (max-width:720px){.brand-logo{height:44px}.foot-logo{margin-left:0}}
+
+/* Gallery: hover + photo viewer */
+.gallery .g-item{position:relative;display:block;width:100%;padding:0;border:0;border-radius:16px;overflow:hidden;cursor:zoom-in;background:var(--teal);aspect-ratio:4/3;transition:transform .35s ease,box-shadow .35s ease}
+.gallery .g-item img{width:100%;height:100%;aspect-ratio:auto;border-radius:0;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .4s}
+.gallery .g-item::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,45,49,.45),rgba(10,45,49,0) 45%);opacity:0;transition:opacity .35s}
+.gallery .g-item::before{content:"+";position:absolute;right:14px;bottom:12px;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font:400 1.5rem/38px var(--f-body);text-align:center;opacity:0;transform:translateY(8px) scale(.9);transition:opacity .35s,transform .35s}
+.gallery .g-item:hover,.gallery .g-item:focus-visible{transform:translateY(-4px);box-shadow:0 18px 40px rgba(10,45,49,.22)}
+.gallery .g-item:hover img,.gallery .g-item:focus-visible img{transform:scale(1.07)}
+.gallery .g-item:hover::after,.gallery .g-item:focus-visible::after,.gallery .g-item:hover::before,.gallery .g-item:focus-visible::before{opacity:1;transform:none}
+.gallery .g-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;height:100%}
+.gallery .g-item:nth-child(5n+1):not(:first-child){grid-column:auto;grid-row:auto;aspect-ratio:4/3;height:auto}
+@media (max-width:720px){.gallery .g-item:first-child{grid-row:auto;aspect-ratio:16/10;height:auto}}
+
+.lb{position:fixed;inset:0;z-index:200;background:rgba(6,24,27,.94);display:flex;align-items:center;justify-content:center;animation:lb-in .25s ease}
+.lb[hidden]{display:none}
+.lb-open{overflow:hidden}
+.lb-stage{margin:0;max-width:min(92vw,1500px);max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb-stage img{max-width:100%;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:12px;opacity:0;transform:scale(.97);transition:opacity .3s ease,transform .3s ease}
+.lb-stage img.in{opacity:1;transform:none}
+.lb-stage figcaption{color:#cfe3e5;font-size:.88rem;letter-spacing:.04em}
+.lb button{position:absolute;border:0;color:#fff;background:rgba(255,255,255,.12);cursor:pointer;border-radius:50%;width:48px;height:48px;font:400 1.6rem/1 var(--f-body);transition:background .2s,transform .2s}
+.lb button:hover{background:rgba(255,255,255,.28);transform:scale(1.08)}
+.lb-close{top:18px;right:18px;font-size:1.1rem!important}
+.lb-prev{left:18px;top:50%;margin-top:-24px}
+.lb-next{right:18px;top:50%;margin-top:-24px}
+@keyframes lb-in{from{opacity:0}to{opacity:1}}
+@media (max-width:720px){.lb-prev,.lb-next{top:auto;bottom:18px;margin-top:0}.lb-prev{left:calc(50% - 60px)}.lb-next{right:calc(50% - 60px)}.lb-stage img{max-height:74vh}}
+@media (prefers-reduced-motion:reduce){.lb,.lb-stage img,.gallery .g-item,.gallery .g-item img,.gallery .g-item::before,.gallery .g-item::after{transition:none;animation:none}.gallery .g-item:hover img{transform:none}}
+
+/* Card hover (rooms index, Hua Hin guide) */
+.info-cards article{transition:transform .35s ease,box-shadow .35s ease}
+.info-cards article:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(10,45,49,.14)}
+.info-cards .media img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.info-cards article:hover .media img{transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){.info-cards article,.info-cards .media img{transition:none}.info-cards article:hover{transform:none}}
+
+/* Google Map */
+.gmap{border-radius:24px;overflow:hidden;background:#dfe9e8;aspect-ratio:16/8}
+.gmap iframe{width:100%;height:100%;border:0;display:block}
+.map-links{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin:20px 0 0}
+@media (max-width:720px){.gmap{aspect-ratio:4/5}}
+.gmap{margin-top:48px}
