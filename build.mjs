@@ -3,6 +3,40 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
+const SITE = 'https://whalehuahin.com';
+const TODAY = '2026-10-04';
+// Pages still holding [placeholder] copy: keep them out of the index and the sitemap until real text is in.
+const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/where-to-eat.html', 'hua-hin/night-markets.html', 'hua-hin/three-easy-days.html']);
+// Cloudflare serves these without .html (and folders with a trailing slash); the old .html URLs 307-redirect, so canonical/sitemap use the final form.
+const canon = p => '/' + p.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
+const DEFAULT_OG = 'images/2026/pool-day-hero.webp';
+// Search-result copy per page (title incl. brand, ~60 chars; description ~150 chars). Only facts already on the site.
+const SEO = {
+  'rooms/index.html': ['Rooms & Suites in Hua Hin | Whale Hua Hin Hotel', 'Superior, Premier High Floor, Jacuzzi Deluxe and a Family Jacuzzi 2-Bedroom Suite at Whale Hua Hin, with a rooftop pool and free shuttle to the city center.'],
+  'rooms/superior.html': ['Superior Room in Hua Hin | Whale Hua Hin Hotel', 'A comfortable Superior room at Whale Hua Hin, a few steps from the rooftop pool and the free shuttle to the city center.'],
+  'rooms/premier-high-floor.html': ['Premier High Floor Room | Whale Hua Hin Hotel', 'Premier High Floor rooms at Whale Hua Hin: more light and open views from a higher floor, with the rooftop pool and free shuttle nearby.'],
+  'rooms/jacuzzi-deluxe.html': ['Jacuzzi Deluxe Room in Hua Hin | Whale Hua Hin', 'A spacious Jacuzzi Deluxe room with a private Jacuzzi at Whale Hua Hin, made for slower moments together in Hua Hin.'],
+  'rooms/two-bedroom-suite.html': ['Family Jacuzzi 2-Bedroom Suite Hua Hin | Whale', 'A two-bedroom family suite with a Jacuzzi at Whale Hua Hin, made for families and friends travelling together.'],
+  'experiences/rooftop-pool.html': ['Rooftop Pool & Slide in Hua Hin | Whale Hua Hin', 'Swim, slide and take in the view at the Whale Hua Hin rooftop pool, with a pool slide and a rooftop bar for sunset.'],
+  'experiences/rooftop-bar.html': ['Rooftop Bar in Hua Hin | Whale Hua Hin Hotel', 'Sunset drinks and easy bites at the Whale Hua Hin rooftop bar, above the city.'],
+  'experiences/well-retreat.html': ['Well Retreat Massage in Hua Hin | Whale Hua Hin', 'Relax with a massage at Well Retreat, the in-hotel spa at Whale Hua Hin, without leaving the hotel.'],
+  'experiences/dining.html': ['Breakfast & Dining | Whale Hua Hin Hotel', 'Breakfast favourites and fresh flavours at Whale Hua Hin, with nowhere you need to rush to.'],
+  'experiences/play-and-unwind.html': ['Theater Room, Pool Table & Archery | Whale Hua Hin', 'Movie nights in the theater room, a round of pool, archery and a fitness room at Whale Hua Hin.'],
+  'hua-hin/index.html': ['Hua Hin Travel Guide | Whale Hua Hin Hotel', 'Beaches, night markets, local food and easy days by the sea: discover Hua Hin from Whale Hua Hin Hotel.'],
+  'about.html': ['About Whale Hua Hin | Hotel in Hua Hin', 'Whale Hua Hin is made for unhurried days: spacious rooms, rooftop swims, sunset drinks and thoughtful comforts.'],
+  'location.html': ['Location & Directions | Whale Hua Hin Hotel', 'Find Whale Hua Hin at 32/112 Hua Hin 8 Alley, Petchkasem Road: about 5 km from Hua Hin town, with free parking and a free shuttle to the city center.'],
+  'offers.html': ['Offers & Direct Booking | Whale Hua Hin Hotel', 'Book Whale Hua Hin direct with the hotel for our best available offers and a stay made a little easier.'],
+  'faq.html': ['FAQ & Policies | Whale Hua Hin Hotel', 'Quick answers about the free shuttle, parking, check-in and more before you stay at Whale Hua Hin.'],
+  'contact.html': ['Contact Whale Hua Hin Hotel, Hua Hin', 'Call +66 32 522 202, email info@whalehuahin.com or message Whale Hua Hin on Facebook about your stay.'],
+};
+const CRUMB = { rooms: ['Rooms', '/rooms/'], 'hua-hin': ['Hua Hin Guide', '/hua-hin/'] };
+const crumbs = (path, name) => {
+  const items = [['Home', '/']];
+  const dir = path.split('/')[0];
+  if (path.includes('/') && CRUMB[dir] && !path.endsWith('index.html')) items.push(CRUMB[dir]);
+  items.push([name, canon(path)]);
+  return JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) });
+};
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 const NAV = (b) => `
@@ -66,18 +100,28 @@ function page(path, { title, eyebrow, h1, lede, desc, blocks }) {
     const name = HERO_IMG[sc] ? P(HERO_IMG[sc]) : sceneSrc(sc);
     if (name) { hero = { src: name, alt: blocks[0][1].label }; blocks = blocks.slice(1); }
   }
+  const [pt, pd] = SEO[path] || [`${title} | Whale Hua Hin`, desc || lede];
   const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} | Whale Hua Hin</title>
-<meta name="description" content="${esc(desc || lede)}">
+<title>${esc(pt)}</title>
+<meta name="description" content="${esc(pd)}">
+${NOINDEX.has(path) ? '<meta name="robots" content="noindex, follow">' : ''}
 <link rel="icon" href="${b}assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="${b}assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="${b}assets/favicon.png">
-<link rel="canonical" href="https://whalehuahin.com/${path}">
-${hero ? `<meta property="og:image" content="${b}${hero.src}">\n` : ''}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="${SITE}${canon(path)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Whale Hua Hin">
+<meta property="og:title" content="${esc(pt)}">
+<meta property="og:description" content="${esc(pd)}">
+<meta property="og:url" content="${SITE}${canon(path)}">
+<meta property="og:image" content="${SITE}/${hero ? hero.src : DEFAULT_OG}">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">${crumbs(path, title)}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${b}styles.css">
 </head>
@@ -170,7 +214,7 @@ for (const [p, v] of Object.entries(pages)) {
   if (/privacy|terms|contact/.test(p)) { page(p, v); continue; }
   v.blocks = withBook(p, v.blocks); page(p, v);
 }
-const urls = ['', 'shuttle.html', ...Object.keys(pages)].map(p => `  <url><loc>https://whalehuahin.com/${p}</loc></url>`).join('\n');
+const urls = ['index.html', 'shuttle.html', ...Object.keys(pages)].filter(p => !NOINDEX.has(p)).map(p => `  <url><loc>${SITE}${canon(p)}</loc><lastmod>${TODAY}</lastmod></url>`).join('\n');
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 writeFileSync('robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: https://whalehuahin.com/sitemap.xml\n');
 console.log(Object.keys(pages).length, 'pages written');
