@@ -6,9 +6,9 @@ const SHUTTLE = {
   reserve: 'Reserve your seat at the lobby, or call +66 32 522 202, at least 30 minutes before the shuttle time.',
   routes: [
     { id: 'out', label: 'To City Center', note: 'Drop-off at Baan Manthana Hotel',
-      times: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '19:00', '20:00', '21:00', '22:00'] },
+      times: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'] },
     { id: 'back', label: 'To Whale Hua Hin', note: 'Pick-up at Baan Manthana Hotel',
-      times: ['10:15', '12:15', '14:15', '16:15', '18:15', '19:15', '20:15', '21:15', '22:15'] },
+      times: ['10:15', '12:15', '14:15', '16:15', '18:15', '20:15', '22:15'] },
   ],
 };
 
