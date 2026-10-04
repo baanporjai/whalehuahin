@@ -6,7 +6,7 @@ import { dirname } from 'node:path';
 const SITE = 'https://whalehuahin.com';
 const TODAY = '2026-10-04';
 // Pages still holding [placeholder] copy: keep them out of the index and the sitemap until real text is in.
-const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/where-to-eat.html', 'hua-hin/night-markets.html', 'hua-hin/three-easy-days.html']);
+const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/night-markets.html', 'hua-hin/three-easy-days.html']);
 // Cloudflare serves these without .html (and folders with a trailing slash); the old .html URLs 307-redirect, so canonical/sitemap use the final form.
 const canon = p => '/' + p.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
 const DEFAULT_OG = 'images/2026/pool-day-hero.webp';
@@ -185,11 +185,15 @@ pages['experiences/play-and-unwind.html'].blocks.splice(1, 1);
 
 /* ---------- Hua Hin ---------- */
 const art = (slug, o) => pages[`hua-hin/${slug}.html`] = { title: o.name, eyebrow: 'Hello, Hua Hin', h1: o.name, lede: o.lede, blocks: [['photo', { scene: o.scene, label: o.name }], ['prose', { text: ['[Write this guide: add real places, tips and distances from the hotel. Mention the free shuttle where it helps.]'] }], ['cta', { text: 'Getting there is easy with the free shuttle.', href: '../shuttle.html', label: 'View shuttle times' }]] };
-art('where-to-eat', { name: 'Where to Eat in Hua Hin', scene: 't1', lede: 'Seafood, noodles and sunset tables.' });
+pages['hua-hin/where-to-eat.html'] = { title: 'Where to Eat in Hua Hin', eyebrow: 'Hello, Hua Hin', h1: 'Where to Eat in Hua Hin', lede: 'Local favourites worth a short trip into town.', blocks: [
+  ['prose', { title: 'Guay Pochana', text: ['A Chinese-style eatery on Hua Hin Soi 51, known for its dry rice soup, crispy roast pork and chicken rice. Air-conditioned and easy for a relaxed breakfast or lunch.', 'Recommended by our owner.'] }],
+  ['spec', { title: 'Good to know', rows: [['Where', 'Hua Hin Soi 51, Hua Hin'], ['Open', 'Daily 07:00–16:00 · please confirm before you go'], ['Known for', 'Dry rice soup, crispy roast pork, chicken rice'], ['Phone', '<a href="tel:+66938720003">093 872 0003</a>'], ['Online', '<a href="https://www.facebook.com/guaypochana/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/guaypochana/" target="_blank" rel="noopener">Instagram</a>']] }],
+  ['cta', { text: 'See it on the map.', href: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%81%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%A0%E0%B8%8A%E0%B8%99%E0%B8%B2+%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%AB%E0%B8%B4%E0%B8%99', label: 'Find on Google Maps' }],
+] };
 art('night-markets', { name: 'Markets After Sunset', scene: 't2', lede: 'Street food, crafts and slow strolls.' });
 art('three-easy-days', { name: 'Three Easy Days in Hua Hin', scene: 't3', lede: 'A simple plan for a first visit.' });
 pages['hua-hin/index.html'] = { title: 'Hua Hin Guide', eyebrow: 'Step out', h1: 'Hello, Hua Hin.', lede: 'Beaches, markets, local food and easy days by the sea—discover more of Hua Hin from Whale.', blocks: [['cards', { items: [
-  { scene: 't1', h: 'Where to Eat in Hua Hin', p: 'Seafood, noodles and sunset tables.', href: 'where-to-eat.html', cta: 'Read guide' },
+  { scene: 't1', h: 'Where to Eat in Hua Hin', p: 'Local favourites worth a short trip into town.', href: 'where-to-eat.html', cta: 'Read guide' },
   { scene: 't2', h: 'Markets After Sunset', p: 'Street food, crafts and slow strolls.', href: 'night-markets.html', cta: 'Read guide' },
   { scene: 't3', h: 'Three Easy Days in Hua Hin', p: 'A simple plan for a first visit.', href: 'three-easy-days.html', cta: 'Read guide' }] }]] };
 

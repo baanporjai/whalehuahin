@@ -1,6 +1,6 @@
 /* Whale Hua Hin — Home. Content blocks below mimic CMS data; swap for API/CMS fetch later. */
 const TOWN = [
-  { title: 'Where to Eat in Hua Hin', blurb: 'Seafood, noodles and sunset tables.', cls: 't1', href: 'hua-hin/where-to-eat.html' },
+  { title: 'Where to Eat in Hua Hin', blurb: 'Local favourites worth a short trip into town.', cls: 't1', href: 'hua-hin/where-to-eat.html' },
   { title: 'Markets After Sunset', blurb: 'Street food, crafts and slow strolls.', cls: 't2', href: 'hua-hin/night-markets.html' },
   { title: 'Three Easy Days in Hua Hin', blurb: 'A simple plan for a first visit.', cls: 't3', href: 'hua-hin/three-easy-days.html' },
 ];
