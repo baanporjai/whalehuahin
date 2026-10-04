@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "whalehuahin-web",
+  "account_id": "a967bb9b648518b88c7947de60046c28",
   "compatibility_date": "2026-10-04",
   "workers_dev": true,
   "routes": [
