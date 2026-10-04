@@ -103,6 +103,7 @@ TOWN.forEach(t => town.append(el('li', 'reveal', `<a href="${esc(t.href)}"><div 
 /* Reviews */
 const rv = $('#review-list');
 REVIEWS.forEach(r => {
+  const draft = false;
   rv.append(el('figure', 'review reveal',
     `${draft ? '<span class="tag">Placeholder</span>' : ''}<blockquote>“${esc(r.quote)}”</blockquote><figcaption>${esc(r.who)} · ${esc(r.src)} · ${esc(r.date)}</figcaption>`));
 });
