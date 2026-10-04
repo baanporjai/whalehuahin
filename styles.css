@@ -420,3 +420,13 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .map-links{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin:20px 0 0}
 @media (max-width:720px){.gmap{aspect-ratio:4/5}}
 .gmap{margin-top:48px}
+
+/* Date fields: formatted DD/MM/YYYY text with the native picker invisible on top */
+.dfield{position:relative;display:block}
+.dfield-text{display:block;font:500 1rem var(--f-body);color:var(--ink);padding:4px 0 0;min-height:1.9em}
+.dfield-text.empty{color:#8aa0a3}
+.dfield input[type="date"]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0}
+
+/* A five-photo gallery would leave a hole in the last row: let the fifth fill it */
+.gallery .g-item:nth-child(5):last-child{grid-column:span 2;aspect-ratio:auto;height:100%}
+@media (max-width:720px){.gallery .g-item:nth-child(5):last-child{grid-column:auto;aspect-ratio:4/3;height:auto}}

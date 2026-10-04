@@ -44,7 +44,24 @@ ci.min = iso(today); co.min = iso(tomorrow);
 ci.addEventListener('change', () => {
   const next = new Date(new Date(ci.value).getTime() + 864e5);
   co.min = iso(next);
-  if (!co.value || co.value <= ci.value) co.value = iso(next);
+  if (!co.value || co.value <= ci.value) { co.value = iso(next); co.dispatchEvent(new Event('change')); }
+});
+
+/* Show dates as DD/MM/YYYY whatever the browser's language is; the native picker and the ISO value underneath are unchanged */
+const dmy = v => v ? v.split('-').reverse().join('/') : '';
+[ci, co].forEach(input => {
+  const wrap = document.createElement('span');
+  wrap.className = 'dfield';
+  const text = document.createElement('span');
+  text.className = 'dfield-text';
+  text.setAttribute('aria-hidden', 'true');
+  input.before(wrap);
+  wrap.append(text, input);
+  const sync = () => { text.textContent = dmy(input.value) || 'DD/MM/YYYY'; text.classList.toggle('empty', !input.value); };
+  input.addEventListener('change', sync);
+  input.addEventListener('input', sync);
+  input.addEventListener('click', () => { try { input.showPicker && input.showPicker(); } catch (e) {} });
+  sync();
 });
 const openSheet = () => { form.classList.add('open'); ci.focus(); };
 const closeSheet = () => form.classList.remove('open');
