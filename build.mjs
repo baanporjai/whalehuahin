@@ -61,7 +61,7 @@ const FOOT = (b) => `
     <nav aria-label="Connect"><h3>Connect</h3><a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">Facebook</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">LINE Official Account</a></nav>
   </div>
   <div class="foot-base">
-    <p>Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand<br>+66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com</p>
+    <p>Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand<br>+66 95 283 4932 · +66 32 522 202 · info@whalehuahin.com</p>
     <p class="foot-legal"><a href="${b}privacy.html">Privacy Policy</a> <a href="${b}terms.html">Terms &amp; Conditions</a></p>
     <p class="copy">© ${new Date().getFullYear()} Whale Hua Hin. All rights reserved.</p>
   </div>
