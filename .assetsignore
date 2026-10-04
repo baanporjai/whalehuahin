@@ -1,0 +1,7 @@
+build.mjs
+wrangler.jsonc
+.assetsignore
+node_modules
+.wrangler
+hotel website 2026
+.gitignore

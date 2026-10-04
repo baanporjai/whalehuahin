@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "whalehuahin-web",
+  "compatibility_date": "2026-10-04",
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "whalehuahin.com", "custom_domain": true },
+    { "pattern": "www.whalehuahin.com", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "."
+  }
+}

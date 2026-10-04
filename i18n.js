@@ -23,7 +23,7 @@
     ['Main', 'เมนูหลัก', '主导航', 'Главное меню'],
     ['Call', 'โทร', '致电', 'Позвонить'],
     // hero + booking
-    ['Made for Easy Days.', 'เกิดมาเพื่อ\nวันสบายๆ', '为轻松时光\n而生。', 'Создан для\nлёгких дней.'],
+    ['Made for Easy Days.', 'เกิดมาเพื่อ\n*วันสบายๆ*', '为轻松时光\n*而生。*', 'Создан для\n*лёгких дней.*'],
     ['Spacious stays, rooftop moments and an easy way to enjoy Hua Hin.', 'ห้องพักกว้างขวาง ช่วงเวลาบนดาดฟ้า และวิธีเพลิดเพลินกับหัวหินแบบสบายๆ', '宽敞的客房、屋顶时光，轻松畅游华欣。', 'Просторные номера, моменты на крыше и лёгкий способ насладиться Хуахином.'],
     ['Explore Whale', 'สำรวจ Whale', '探索 Whale', 'Узнать о Whale'],
     ['Check Availability', 'ตรวจสอบห้องว่าง', '查询空房', 'Проверить наличие'],
@@ -81,7 +81,7 @@
     ['Advance reservation may be required.', 'อาจต้องจองล่วงหน้า', '可能需要提前预约。', 'Может потребоваться предварительная запись.'],
     ['View Shuttle Times', 'ดูเวลารถรับส่ง', '查看接驳车时刻', 'Расписание трансфера'],
     ['See our location', 'ดูที่ตั้งของเรา', '查看我们的位置', 'Как нас найти'],
-    ['Stop', 'จุดจอด', '站点', 'Остановка'],
+    ['Route', 'เส้นทาง', '路线', 'Маршрут'],
     ['Service', 'เวลาให้บริการ', '服务时间', 'Время работы'],
     ['Free shuttle stops and service hours', 'จุดจอดรถรับส่งฟรีและเวลาให้บริการ', '免费接驳车站点及服务时间', 'Остановки и часы работы бесплатного трансфера'],
     ['Hua Hin Beach', 'ชายหาดหัวหิน', '华欣海滩', 'Пляж Хуахина'],
@@ -156,7 +156,7 @@
     ['Good days, according to our guests.', 'วันดีๆ ตามคำบอกเล่า\nของแขกของเรา', '住客眼中的\n美好时光。', 'Хорошие дни\nглазами наших гостей.'],
     ['“The room was incredibly spacious and the rooftop pool was a highlight.”', '“ห้องกว้างมากๆ และสระว่ายน้ำบนดาดฟ้าคือไฮไลต์เลย”', '“客房非常宽敞，屋顶泳池是一大亮点。”', '«Номер был невероятно просторным, а бассейн на крыше стал настоящим украшением».'],
     // final cta
-    ['Your easy days start here.', 'วันสบายๆ ของคุณ\nเริ่มต้นที่นี่', '轻松时光，\n从这里开始。', 'Ваши лёгкие дни\nначинаются здесь.'],
+    ['Your easy days start here.', 'วันสบายๆ ของคุณ\n*เริ่มต้นที่นี่*', '轻松时光，\n*从这里开始。*', 'Ваши лёгкие дни\n*начинаются здесь.*'],
     ['Book direct for our best available offers and a stay made a little easier.', 'จองตรงเพื่อรับข้อเสนอที่ดีที่สุดและการเข้าพักที่สบายขึ้นอีกนิด', '直接预订，享受我们当前最优惠的价格，让入住更轻松一点。', 'Бронируйте напрямую — лучшие доступные предложения и ещё более лёгкий отдых.'],
     ['Book your stay', 'จองที่พักของคุณ', '预订您的住宿', 'Забронировать'],
     ['View offers', 'ดูโปรโมชัน', '查看优惠', 'Посмотреть предложения'],
@@ -228,6 +228,39 @@
     ['Legal', 'ข้อมูลทางกฎหมาย', '法律信息', 'Правовая информация'],
     ['How Whale Hua Hin handles your personal data.', 'วิธีที่ Whale Hua Hin จัดการข้อมูลส่วนบุคคลของคุณ', 'Whale Hua Hin 如何处理您的个人数据。', 'Как Whale Hua Hin обрабатывает ваши персональные данные.'],
     ['The terms that apply to bookings and stays.', 'ข้อกำหนดที่ใช้กับการจองและการเข้าพัก', '适用于预订和住宿的条款。', 'Условия, применимые к бронированиям и проживанию.'],
+    ['View shuttle times', 'ดูเวลารถรับส่ง', '查看接驳车时刻', 'Расписание трансфера'],
+    ['What time is check-in and check-out?', 'เช็กอินและเช็กเอาต์กี่โมง?', '入住和退房时间是几点？', 'Во сколько заезд и выезд?'],
+    ['Is breakfast included?', 'รวมอาหารเช้าหรือไม่?', '含早餐吗？', 'Завтрак включён?'],
+    ['Can I cancel or change my booking?', 'ยกเลิกหรือเปลี่ยนการจองได้ไหม?', '可以取消或更改预订吗？', 'Можно ли отменить или изменить бронирование?'],
+    ['Are children welcome?', 'รับเด็กหรือไม่?', '欢迎儿童入住吗？', 'Принимаете ли вы детей?'],
+    ['Do you have parking?', 'มีที่จอดรถหรือไม่?', '有停车位吗？', 'Есть ли парковка?'],
+    ['When is the rooftop pool open?', 'สระบนดาดฟ้าเปิดกี่โมง?', '屋顶泳池几点开放？', 'Когда работает бассейн на крыше?'],
+    ['Reserve your seat in advance.', 'กรุณาจองที่นั่งล่วงหน้า', '请提前预订座位。', 'Бронируйте место заранее.'],
+    ['Next from hotel ·', 'รอบถัดไปจากโรงแรม ·', '酒店下一班 ·', 'Ближайший рейс от отеля ·'],
+    ['First trip tomorrow ·', 'รอบแรกพรุ่งนี้ ·', '明日首班 ·', 'Первый рейс завтра ·'],
+    ['To City Center', 'ไปใจกลางเมือง', '前往市中心', 'В центр города'],
+    ['To Whale Hua Hin', 'กลับโรงแรม Whale Hua Hin', '返回 Whale Hua Hin', 'В Whale Hua Hin'],
+    ['Drop-off at Baan Manthana Hotel', 'ส่งที่โรงแรมบ้านมัณฑนา', '在 Baan Manthana 酒店下车', 'Высадка у отеля Baan Manthana'],
+    ['Pick-up at Baan Manthana Hotel', 'รับที่โรงแรมบ้านมัณฑนา', '在 Baan Manthana 酒店上车', 'Посадка у отеля Baan Manthana'],
+    ['Leaves city center', 'ออกจากใจกลางเมือง', '市中心发车', 'Отправление из центра'],
+    ['Complimentary shuttle between Whale Hua Hin and the city center at Baan Manthana Hotel.', 'รถรับส่งฟรีระหว่าง Whale Hua Hin และใจกลางเมืองที่โรงแรมบ้านมัณฑนา', '免费接驳车往返 Whale Hua Hin 与市中心的 Baan Manthana 酒店。', 'Бесплатный трансфер между Whale Hua Hin и центром города у отеля Baan Manthana.'],
+    ['Choose a direction to see every trip. Times are Hua Hin local time.', 'เลือกเส้นทางเพื่อดูทุกรอบ เวลาทั้งหมดเป็นเวลาท้องถิ่นของหัวหิน', '选择方向查看所有班次。时间为华欣当地时间。', 'Выберите направление, чтобы увидеть все рейсы. Время местное, Хуахин.'],
+    ['Shuttle directions', 'เส้นทางรถรับส่ง', '接驳车方向', 'Направления трансфера'],
+    ['Reserve your seat', 'จองที่นั่ง', '预订座位', 'Забронируйте место'],
+    ['Reserve at the lobby or by phone at least 30 minutes before the shuttle time.', 'จองที่ล็อบบี้หรือทางโทรศัพท์อย่างน้อย 30 นาทีก่อนเวลารถออก', '请至少在发车前30分钟，在大堂或通过电话预订。', 'Забронируйте место в лобби или по телефону не позднее чем за 30 минут до отправления.'],
+    ['Be there early', 'มาถึงก่อนเวลา', '提前到达', 'Приходите заранее'],
+    ['Coming back, wait at Baan Manthana Hotel (City Center) 15 minutes before the shuttle leaves. Seats are reserved in advance only.', 'ขากลับ ให้รอที่โรงแรมบ้านมัณฑนา (ใจกลางเมือง) 15 นาทีก่อนรถออก รับเฉพาะผู้ที่จองที่นั่งล่วงหน้า', '返程时，请在发车前15分钟到 Baan Manthana 酒店（市中心）等候。仅限提前预订座位。', 'На обратный путь ждите у отеля Baan Manthana (центр города) за 15 минут до отправления. Только по предварительной брони.'],
+    ['Allow for traffic', 'เผื่อเวลาเรื่องการจราจร', '预留交通时间', 'Учитывайте пробки'],
+    ['The shuttle can be 10–20 minutes late, depending on traffic.', 'รถอาจล่าช้า 10–20 นาทีตามสภาพการจราจร', '视交通情况，接驳车可能晚到10至20分钟。', 'Трансфер может опаздывать на 10–20 минут в зависимости от пробок.'],
+    ['Yes. The complimentary shuttle runs between the hotel and the city center (Baan Manthana Hotel). Please reserve your seat in advance.', 'ฟรี รถรับส่งวิ่งระหว่างโรงแรมและใจกลางเมือง (โรงแรมบ้านมัณฑนา) กรุณาจองที่นั่งล่วงหน้า', '是的。免费接驳车往返酒店与市中心（Baan Manthana 酒店）。请提前预订座位。', 'Да. Бесплатный трансфер курсирует между отелем и центром города (отель Baan Manthana). Пожалуйста, бронируйте место заранее.'],
+    ['Whale Hua Hin, with a free shuttle to the city center.', 'Whale Hua Hin พร้อมรถรับส่งฟรีไปใจกลางเมือง', 'Whale Hua Hin 提供前往市中心的免费接驳车。', 'Whale Hua Hin с бесплатным трансфером в центр города.'],
+    ['Use the free shuttle to the city center.', 'ใช้รถรับส่งฟรีไปใจกลางเมือง', '乘坐免费接驳车前往市中心。', 'Пользуйтесь бесплатным трансфером в центр города.'],
+    ['Inside the room', 'ภายในห้อง', '客房内景', 'Внутри номера'],
+    ['The rooftop', 'ดาดฟ้า', '屋顶', 'Крыша'],
+    ['Cocktails', 'ค็อกเทล', '鸡尾酒', 'Коктейли'],
+    ['Gallery', 'แกลเลอรี', '图库', 'Галерея'],
+    ['The hotel', 'โรงแรม', '酒店', 'Отель'],
+    ['Fitness & Gym', 'ฟิตเนส', '健身房', 'Фитнес-зал'],
     // page <title> / meta
     ['Free Shuttle', 'รถรับส่งฟรี', '免费接驳车', 'Бесплатный трансфер'],
     ['Spacious Rooms, Rooftop Pool & Free Shuttle', 'ห้องพักกว้างขวาง สระบนดาดฟ้า และรถรับส่งฟรี', '宽敞客房、屋顶泳池与免费接驳车', 'Просторные номера, бассейн на крыше и бесплатный трансфер'],
@@ -249,15 +282,16 @@
   const recs = new WeakMap();
   let lang = 'en', busy = false;
 
+  const ownText = el => [...el.childNodes].map(n => n.nodeType === 3 ? n.nodeValue : n.tagName === 'BR' ? ' ' : n.textContent).join('');
   function leaf(el) {
     let r = recs.get(el);
     if (r && el.innerHTML !== r.cur) r = null; // content changed by page script
     if (!r) {
-      const text = [...el.childNodes].filter(n => n.nodeType === 3).map(n => n.nodeValue).join(' ');
+      const text = ownText(el);
       r = { html: el.innerHTML, text, cur: el.innerHTML };
     }
     const t = lang === 'en' ? null : lookup(lang, r.text);
-    r.cur = t ? esc(t).replace(/\n/g, '<br>') : r.html;
+    r.cur = t ? esc(t).replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>') : r.html;
     if (el.innerHTML !== r.cur) el.innerHTML = r.cur;
     recs.set(el, r);
   }
@@ -273,8 +307,8 @@
   function walk(el) {
     if (SKIP.has(el.tagName.toUpperCase())) return;
     const kids = [...el.childNodes];
-    if (kids.every(n => n.nodeType === 3 || (n.nodeType === 1 && n.tagName === 'BR'))) {
-      if (norm(kids.map(n => n.nodeValue || '').join(' '))) leaf(el);
+    if (kids.every(n => n.nodeType === 3 || (n.nodeType === 1 && (n.tagName === 'BR' || n.tagName === 'EM')))) {
+      if (norm(ownText(el))) leaf(el);
       return;
     }
     for (const n of kids) {

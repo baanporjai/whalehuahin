@@ -25,7 +25,7 @@ const onScroll = () => header.classList.toggle('scrolled', scrollY > 40);
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
 /* Hero slides */
-const slides = [...document.querySelectorAll('.hero-slides .ph')];
+const slides = [...document.querySelectorAll('.hero-slides img')];
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let i = 0;
   setInterval(() => {
@@ -65,18 +65,14 @@ document.querySelectorAll('[data-price]').forEach(p => {
 
 /* Shuttle table + next departure */
 const rows = $('#shuttle-rows');
-SHUTTLE.stops.forEach(s => {
-  const tr = el('tr', '', `<td><b>${esc(s.name)}</b><span>${esc(s.detail)}</span></td><td>${s.first ? `${s.first}–${s.last}` : '—'}</td>`);
-  rows.append(tr);
+SHUTTLE.routes.forEach(r => {
+  rows.append(el('tr', '', `<td><b>${esc(r.label)}</b><span>${esc(r.note)}</span></td><td>${r.times[0]}–${r.times[r.times.length - 1]}</td>`));
 });
-const next = $('#shuttle-next');
-const nowMin = new Date().getHours() * 60 + new Date().getMinutes();
-const toMin = t => +t.slice(0, 2) * 60 + +t.slice(3);
-const live = SHUTTLE.stops.filter(s => s.first);
-const running = live.filter(s => nowMin >= toMin(s.first) && nowMin <= toMin(s.last));
-next.innerHTML = running.length
-  ? `Running now · <b>${esc(running[0].name)}</b>`
-  : `Next service starts <b>${esc(live.sort((a, b) => toMin(a.first) - toMin(b.first))[0].first)}</b>`;
+const nowMin = hotelNowMin();
+const upcoming = SHUTTLE.routes[0].times.find(t => timeMin(t) >= nowMin);
+$('#shuttle-next').innerHTML = upcoming
+  ? `Next from hotel · <b>${upcoming}</b>`
+  : `First trip tomorrow · <b>${SHUTTLE.routes[0].times[0]}</b>`;
 
 /* Hello, Hua Hin cards */
 const town = $('#town-list');
@@ -91,7 +87,7 @@ REVIEWS.forEach(r => {
 });
 
 /* Reveal on scroll */
-document.querySelectorAll('.reason-list li, .room, .pair article, .mosaic figure, .shuttle-card').forEach(e => e.classList.add('reveal'));
+document.querySelectorAll('.tiles li, .room, .pair article, .mosaic figure, .shuttle-card, .shuttle-photo').forEach(e => e.classList.add('reveal'));
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(e => io.observe(e));
 
