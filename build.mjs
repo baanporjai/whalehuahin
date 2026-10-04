@@ -8,8 +8,7 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const NAV = (b) => `
 <header class="site-header scrolled">
   <a class="brand" href="${b}index.html" aria-label="Whale Hua Hin — home">
-    <svg viewBox="0 0 48 28" width="34" height="20" aria-hidden="true"><path d="M2 16c6 0 8-8 16-8 7 0 8 6 14 6 4 0 5-4 9-4 2 0 5 1 7 3-2 9-9 14-19 14C13 27 4 24 2 16Z" fill="currentColor"/><circle cx="14" cy="17" r="1.6" fill="#fff"/></svg>
-    <span>WHALE <b>HUA HIN</b></span>
+    <img class="brand-logo logo-white" src="${b}assets/logo-white.webp" alt="Whale Hua Hin" width="86" height="60"><img class="brand-logo logo-color" src="${b}assets/logo.webp" alt="Whale Hua Hin" width="86" height="60">
   </a>
   <nav class="nav" aria-label="Main">
     <a href="${b}rooms/">Stay</a><a href="${b}index.html#experiences">Experiences</a><a href="${b}hua-hin/">Hua Hin</a><a href="${b}offers.html">Offers</a><a href="${b}about.html">About</a>
@@ -19,11 +18,12 @@ const NAV = (b) => `
 
 const FOOT = (b) => `
 <footer class="site-footer">
+  <img class="foot-logo" src="${b}assets/logo-white.webp" alt="Whale Hua Hin" width="120" height="83" loading="lazy">
   <div class="foot-cols">
     <nav aria-label="Stay"><h3>Stay</h3><a href="${b}rooms/">All Rooms</a><a href="${b}rooms/jacuzzi-deluxe.html">Jacuzzi Deluxe</a><a href="${b}rooms/two-bedroom-suite.html">Two-Bedroom Suite</a><a href="${b}index.html#book">Cloudbeds Booking</a></nav>
     <nav aria-label="Explore"><h3>Explore</h3><a href="${b}index.html#experiences">Experiences</a><a href="${b}hua-hin/">Hua Hin Guide</a><a href="${b}offers.html">Offers</a><a href="${b}experiences/well-retreat.html">Well Retreat</a></nav>
     <nav aria-label="Help"><h3>Help</h3><a href="${b}location.html">Location</a><a href="${b}shuttle.html">Shuttle Times</a><a href="${b}faq.html">FAQ &amp; Policies</a><a href="${b}contact.html">Contact</a></nav>
-    <nav aria-label="Connect"><h3>Connect</h3><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">LINE / WhatsApp</a></nav>
+    <nav aria-label="Connect"><h3>Connect</h3><a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">Facebook</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">LINE / WhatsApp</a></nav>
   </div>
   <div class="foot-base">
     <p>Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand<br>+66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com</p>
@@ -77,7 +77,7 @@ function page(path, { title, eyebrow, h1, lede, desc, blocks }) {
 <link rel="apple-touch-icon" href="${b}assets/favicon.png">
 <link rel="canonical" href="https://whalehuahin.com/${path}">
 ${hero ? `<meta property="og:image" content="${b}${hero.src}">\n` : ''}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${b}styles.css">
 </head>
 <body class="page-inner">${NAV(b)}
@@ -159,7 +159,7 @@ pages['faq.html'] = { title: 'FAQ & Policies', eyebrow: 'Help', h1: 'Good to kno
   ['Are children welcome?', '[Child policy, extra beds, ages]'],
   ['Do you have parking?', '[Parking info]'],
   ['When is the rooftop pool open?', '[Pool hours and slide rules]']] }]] };
-pages['contact.html'] = { title: 'Contact', eyebrow: 'Say hello', h1: 'We’re glad<br>to help.', lede: 'Questions about your stay, the shuttle or a special occasion? Reach the team directly.', blocks: [['spec', { title: 'Reach us', rows: [['Phone', '<a href="tel:+6632522202">+66 32 522 202</a> · <a href="tel:+66952834932">+66 95 283 4932</a>'], ['Email', '<a href="mailto:info@whalehuahin.com">info@whalehuahin.com</a>'], ['LINE / WhatsApp', '[LINE ID]'], ['Address', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand'], ['Front desk', '[Hours]']] }]] };
+pages['contact.html'] = { title: 'Contact', eyebrow: 'Say hello', h1: 'We’re glad<br>to help.', lede: 'Questions about your stay, the shuttle or a special occasion? Reach the team directly.', blocks: [['spec', { title: 'Reach us', rows: [['Phone', '<a href="tel:+6632522202">+66 32 522 202</a> · <a href="tel:+66952834932">+66 95 283 4932</a>'], ['Email', '<a href="mailto:info@whalehuahin.com">info@whalehuahin.com</a>'], ['Facebook', '<a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">facebook.com/whalehuahinhotel</a>'], ['LINE / WhatsApp', '[LINE ID]'], ['Address', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand'], ['Front desk', '[Hours]']] }]] };
 pages['privacy.html'] = { title: 'Privacy Policy', eyebrow: 'Legal', h1: 'Privacy Policy', lede: 'How Whale Hua Hin handles your personal data.', blocks: [['prose', { text: ['[Insert the hotel’s privacy policy, reviewed for Thailand PDPA. Do not publish without legal review.]'] }]] };
 pages['terms.html'] = { title: 'Terms & Conditions', eyebrow: 'Legal', h1: 'Terms &amp; Conditions', lede: 'The terms that apply to bookings and stays.', blocks: [['prose', { text: ['[Insert booking terms, cancellation and payment conditions.]'] }]] };
 
