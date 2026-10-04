@@ -64,18 +64,15 @@
     </div>
   </div>
 
-  <form class="booking" id="book" action="https://th.trip.com/hotels/detail/" method="get" target="_blank" rel="noopener">
+  <form class="booking" id="book" action="https://us2.cloudbeds.com/reservation/iB7gnf" method="get" target="_blank" rel="noopener">
     <button class="booking-close" type="button" aria-label="Close booking panel">✕</button>
-    <label>Check-in<input type="date" name="checkIn" required></label>
-    <label>Check-out<input type="date" name="checkOut" required></label>
+    <input type="hidden" name="currency" value="thb">
+    <label>Check-in<input type="date" name="checkin" required></label>
+    <label>Check-out<input type="date" name="checkout" required></label>
     <label>Guests
-      <select name="adult"><option value="1">1 Guest</option><option value="2" selected>2 Guests</option><option value="3">3 Guests</option><option value="4">4 Guests</option><option value="5">5 Guests</option><option value="6">6 Guests</option></select>
+      <select name="adults"><option value="1">1 Guest</option><option value="2" selected>2 Guests</option><option value="3">3 Guests</option><option value="4">4 Guests</option><option value="5">5 Guests</option><option value="6">6 Guests</option></select>
     </label>
-    <div class="ota" role="group" aria-label="Book on">
-      <button class="btn btn-aqua" type="button" data-ota="trip">Trip.com</button>
-      <button class="btn btn-aqua" type="button" data-ota="agoda">Agoda</button>
-      <button class="btn btn-aqua" type="button" data-ota="booking">Booking.com</button>
-    </div>
+    <button class="btn btn-aqua" type="submit">Book direct</button>
   </form>
   <button class="btn btn-aqua booking-open" type="button" aria-controls="book">Check Availability</button>
 </section>

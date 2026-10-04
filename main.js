@@ -39,7 +39,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 const form = $('#book');
 const iso = d => d.toISOString().slice(0, 10);
 const today = new Date(), tomorrow = new Date(Date.now() + 864e5);
-const ci = form.elements.checkIn, co = form.elements.checkOut;
+const ci = form.elements.checkin, co = form.elements.checkout;
 ci.min = iso(today); co.min = iso(tomorrow);
 ci.addEventListener('change', () => {
   const next = new Date(new Date(ci.value).getTime() + 864e5);
@@ -67,18 +67,7 @@ const openSheet = () => { form.classList.add('open'); ci.focus(); };
 const closeSheet = () => form.classList.remove('open');
 $('.booking-open').addEventListener('click', openSheet);
 $('.booking-close').addEventListener('click', closeSheet);
-/* Booking partners: open the hotel's page on each site with the chosen dates and guests */
-const nights = () => Math.max(1, Math.round((new Date(co.value) - new Date(ci.value)) / 864e5));
-const OTA = {
-  trip: g => 'https://th.trip.com/hotels/detail/?' + new URLSearchParams({ hotelId: '14185237', cityId: '3759', cityEnName: 'Hua Hin', crn: '1', children: '0', curr: 'THB', locale: 'en-TH', checkIn: ci.value, checkOut: co.value, adult: g }),
-  agoda: g => 'https://www.agoda.com/whale-hua-hin/hotel/hua-hin-cha-am-th.html?' + new URLSearchParams({ checkIn: ci.value, los: nights(), adults: g, rooms: '1', children: '0' }),
-  booking: g => 'https://www.booking.com/hotel/th/whale-hua-hin.html?' + new URLSearchParams({ checkin: ci.value, checkout: co.value, group_adults: g, no_rooms: '1', group_children: '0' }),
-};
-form.querySelectorAll('[data-ota]').forEach(b => b.addEventListener('click', () => {
-  if (!form.reportValidity()) return;
-  open(OTA[b.dataset.ota](form.elements.adult.value), '_blank', 'noopener');
-}));
-form.addEventListener('submit', e => { e.preventDefault(); form.querySelector('[data-ota="trip"]').click(); });
+/* Submitting the form opens the hotel's own Cloudbeds booking engine with the chosen dates and guests */
 
 document.querySelectorAll('[data-book]').forEach(a => a.addEventListener('click', e => {
   e.preventDefault();
