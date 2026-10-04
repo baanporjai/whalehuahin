@@ -265,6 +265,15 @@
     ['Get directions', 'นำทาง', '获取路线', 'Построить маршрут'],
     ['Open in Google Maps', 'เปิดใน Google Maps', '在 Google 地图中打开', 'Открыть в Google Картах'],
     ['Map and directions', 'แผนที่และเส้นทาง', '地图与路线', 'Карта и маршрут'],
+    ['About 5 km, around 10 minutes by car', 'ประมาณ 5 กม. ใช้เวลาขับรถราว 10 นาที', '约5公里，驾车约10分钟', 'Около 5 км, примерно 10 минут на машине'],
+    ['About 200 km, around 2 hours 30 minutes by car', 'ประมาณ 200 กม. ใช้เวลาขับรถราว 2 ชั่วโมง 30 นาที', '约200公里，驾车约2小时30分钟', 'Около 200 км, примерно 2 часа 30 минут на машине'],
+    ['Free parking for guests, with EV charging points available', 'มีที่จอดรถฟรีสำหรับผู้เข้าพัก พร้อมจุดชาร์จรถยนต์ไฟฟ้า', '住客可免费停车，并设有电动车充电桩', 'Бесплатная парковка для гостей, есть зарядные станции для электромобилей'],
+    ['Yes. Parking is free for guests, and there are EV charging points available.', 'มี ที่จอดรถฟรีสำหรับผู้เข้าพัก และมีจุดชาร์จรถยนต์ไฟฟ้า', '有。住客可免费停车，并设有电动车充电桩。', 'Да. Парковка для гостей бесплатная, есть зарядные станции для электромобилей.'],
+    ['Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand +66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com', 'Whale Hua Hin · 32/112 ซอยหัวหิน 8 ถนนเพชรเกษม หัวหิน จ.ประจวบคีรีขันธ์ 77110
++66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com', 'Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand
++66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com', 'Whale Hua Hin · 32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand
++66 32 522 202 · +66 95 283 4932 · info@whalehuahin.com'],
+    ['32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand', '32/112 ซอยหัวหิน 8 ถนนเพชรเกษม หัวหิน จ.ประจวบคีรีขันธ์ 77110', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand'],
     ['Cocktails', 'ค็อกเทล', '鸡尾酒', 'Коктейли'],
     ['Gallery', 'แกลเลอรี', '图库', 'Галерея'],
     ['The hotel', 'โรงแรม', '酒店', 'Отель'],

@@ -60,15 +60,17 @@
   </div>
 
   <form class="booking" id="book" action="https://th.trip.com/hotels/detail/" method="get" target="_blank" rel="noopener">
-    <input type="hidden" name="hotelId" value="14185237"><input type="hidden" name="cityId" value="3759"><input type="hidden" name="cityEnName" value="Hua Hin">
-    <input type="hidden" name="crn" value="1"><input type="hidden" name="children" value="0"><input type="hidden" name="curr" value="THB"><input type="hidden" name="locale" value="en-TH">
     <button class="booking-close" type="button" aria-label="Close booking panel">✕</button>
     <label>Check-in<input type="date" name="checkIn" required></label>
     <label>Check-out<input type="date" name="checkOut" required></label>
     <label>Guests
       <select name="adult"><option value="1">1 Guest</option><option value="2" selected>2 Guests</option><option value="3">3 Guests</option><option value="4">4 Guests</option><option value="5">5 Guests</option><option value="6">6 Guests</option></select>
     </label>
-    <button class="btn btn-aqua" type="submit">Check rooms</button>
+    <div class="ota" role="group" aria-label="Book on">
+      <button class="btn btn-aqua" type="button" data-ota="trip">Trip.com</button>
+      <button class="btn btn-aqua" type="button" data-ota="agoda">Agoda</button>
+      <button class="btn btn-aqua" type="button" data-ota="booking">Booking.com</button>
+    </div>
   </form>
   <button class="btn btn-aqua booking-open" type="button" aria-controls="book">Check Availability</button>
 </section>
