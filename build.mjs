@@ -66,7 +66,7 @@ const FOOT = (b) => `
     <p class="copy">© ${new Date().getFullYear()} Whale Hua Hin. All rights reserved.</p>
   </div>
 </footer>
-<div class="sticky-bar"><a href="tel:+6632522202">Call</a><a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">LINE</a><a class="btn btn-aqua" href="${b}index.html#book">Book now</a></div>`;
+<div class="sticky-bar"><a href="tel:+66952834932">Call +66 95 283 4932</a><a href="tel:+6632522202">Call +66 32 522 202</a><a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">LINE</a><a class="btn btn-aqua" href="${b}index.html#book">Book now</a></div>`;
 
 /* Photos live in images/2026/ (processed from "hotel website 2026"). A scene name maps to a photo; unmapped scenes stay as colour placeholders. */
 const P = n => `images/2026/${n}.webp`;
@@ -215,7 +215,7 @@ pages['faq.html'] = { title: 'FAQ & Policies', eyebrow: 'Help', h1: 'Good to kno
   ['Are children welcome?', '[Child policy, extra beds, ages]'],
   ['Do you have parking?', 'Yes. Parking is free for guests, and there are EV charging points available.'],
   ['When is the rooftop pool open?', '[Pool hours and slide rules]']] }]] };
-pages['contact.html'] = { title: 'Contact', eyebrow: 'Say hello', h1: 'We’re glad<br>to help.', lede: 'Questions about your stay, the shuttle or a special occasion? Reach the team directly.', blocks: [['spec', { title: 'Reach us', rows: [['Phone', '<a href="tel:+6632522202">+66 32 522 202</a> · <a href="tel:+66952834932">+66 95 283 4932</a>'], ['Email', '<a href="mailto:info@whalehuahin.com">info@whalehuahin.com</a>'], ['Facebook', '<a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">facebook.com/whalehuahinhotel</a>'], ['LINE Official Account', '<a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">@whalehuahinhotel</a>'], ['Address', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand<br><a href="location.html">Map and directions</a>'], ['Front desk', '[Hours]']] }]] };
+pages['contact.html'] = { title: 'Contact', eyebrow: 'Say hello', h1: 'We’re glad<br>to help.', lede: 'Questions about your stay, the shuttle or a special occasion? Reach the team directly.', blocks: [['spec', { title: 'Reach us', rows: [['Phone', '<a href="tel:+66952834932">+66 95 283 4932</a> · <a href="tel:+6632522202">+66 32 522 202</a>'], ['Email', '<a href="mailto:info@whalehuahin.com">info@whalehuahin.com</a>'], ['Facebook', '<a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">facebook.com/whalehuahinhotel</a>'], ['LINE Official Account', '<a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">@whalehuahinhotel</a>'], ['Address', '32/112 Hua Hin 8 Alley, Petchkasem Road, Hua Hin, Prachuap Khiri Khan 77110, Thailand<br><a href="location.html">Map and directions</a>'], ['Front desk', '[Hours]']] }]] };
 pages['privacy.html'] = { title: 'Privacy Policy', eyebrow: 'Legal', h1: 'Privacy Policy', lede: 'How Whale Hua Hin handles your personal data.', blocks: [['prose', { text: ['[Insert the hotel’s privacy policy, reviewed for Thailand PDPA. Do not publish without legal review.]'] }]] };
 pages['terms.html'] = { title: 'Terms & Conditions', eyebrow: 'Legal', h1: 'Terms &amp; Conditions', lede: 'The terms that apply to bookings and stays.', blocks: [['prose', { text: ['[Insert booking terms, cancellation and payment conditions.]'] }]] };
 
