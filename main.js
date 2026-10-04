@@ -1,6 +1,6 @@
 /* Whale Hua Hin — Home. Content blocks below mimic CMS data; swap for API/CMS fetch later. */
 const TOWN = [
-  { title: 'Where to Eat in Hua Hin', blurb: 'Local favourites worth a short trip into town.', cls: 't1', href: 'hua-hin/where-to-eat.html' },
+  { title: 'Where to Eat in Hua Hin', blurb: 'Local favourites worth a short trip into town.', cls: 't1', img: 'images/2026/guay-pochana.webp', href: 'hua-hin/where-to-eat.html' },
   { title: 'Markets After Sunset', blurb: 'Street food, crafts and slow strolls.', cls: 't2', href: 'hua-hin/night-markets.html' },
   { title: 'Three Easy Days in Hua Hin', blurb: 'A simple plan for a first visit.', cls: 't3', href: 'hua-hin/three-easy-days.html' },
 ];
@@ -95,7 +95,7 @@ $('#shuttle-next').innerHTML = upcoming
 
 /* Hello, Hua Hin cards */
 const town = $('#town-list');
-TOWN.forEach(t => town.append(el('li', 'reveal', `<a href="${esc(t.href)}"><div class="ph ${t.cls}"></div><h3>${esc(t.title)}</h3><p>${esc(t.blurb)}</p></a>`)));
+TOWN.forEach(t => town.append(el('li', 'reveal', `<a href="${esc(t.href)}"><div class="ph ${t.cls}${t.img ? ' fit' : ''}">${t.img ? `<img src="${esc(t.img)}" alt="" loading="lazy">` : ''}</div><h3>${esc(t.title)}</h3><p>${esc(t.blurb)}</p></a>`)));
 
 /* Reviews */
 const rv = $('#review-list');

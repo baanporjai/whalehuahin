@@ -426,3 +426,7 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 /* A five-photo gallery would leave a hole in the last row: let the fifth fill it */
 .gallery .g-item:nth-child(5):last-child{grid-column:span 2;aspect-ratio:auto;height:100%}
 @media (max-width:720px){.gallery .g-item:nth-child(5):last-child{grid-column:auto;aspect-ratio:4/3;height:auto}}
+
+/* Square logo-style artwork inside a portrait/landscape slot: show it whole on its own background colour */
+.ph.fit,.media.fit{background:#0f3b7e}
+.ph.fit>img,.media.fit>img{display:block;width:100%;height:100%;object-fit:contain}

@@ -76,13 +76,14 @@ const SCENE_IMG = {
   'scene-lifestyle': 'model-window',
 };
 const HERO_IMG = { 'photo-rooftop': 'pool-day-hero', 'photo-superior': 'superior-2', 'photo-room-premier': 'premier-tub-2' };
-const sceneSrc = sc => sc === 'photo-pooltable' ? 'images/pooltable.jpg' : SCENE_IMG[sc] ? P(SCENE_IMG[sc]) : null;
+const FIT = new Set(['t1']);
+const sceneSrc = sc => sc === 't1' ? P('guay-pochana') : sc === 'photo-pooltable' ? 'images/pooltable.jpg' : SCENE_IMG[sc] ? P(SCENE_IMG[sc]) : null;
 
 /* Block renderers */
 const B = {
   prose: ({ title, text }) => `<section class="section prose">${title ? `<h2 class="h-section">${title}</h2>` : ''}${[].concat(text).map(t => `<p>${t}</p>`).join('')}</section>`,
   photo: ({ scene, label }) => { const src = sceneSrc(scene); return `<section class="photo-band"><figure class="${src ? 'media' : 'ph ' + scene}" role="img" aria-label="${esc(label)}">${src ? `<img src="${src}" alt="${esc(label)}" loading="lazy">` : `<figcaption class="ph-note">Photo: ${esc(label)}</figcaption>`}</figure></section>`; },
-  cards: ({ title, items }) => `<section class="section">${title ? `<h2 class="h-section">${title}</h2>` : ''}<div class="info-cards">${items.map(i => { const src = i.scene && sceneSrc(i.scene); return `<article>${src ? `<figure class="media"><img src="${src}" alt="" loading="lazy"></figure>` : i.scene ? `<div class="ph ${i.scene}"></div>` : ''}<h3>${i[0] || i.h}</h3><p>${i[1] || i.p}</p>${i.href ? `<a class="link-arrow" href="${i.href}">${i.cta}</a>` : ''}</article>`; }).join('')}</div></section>`,
+  cards: ({ title, items }) => `<section class="section">${title ? `<h2 class="h-section">${title}</h2>` : ''}<div class="info-cards">${items.map(i => { const src = i.scene && sceneSrc(i.scene); return `<article>${src ? `<figure class="media${FIT.has(i.scene) ? ' fit' : ''}"><img src="${src}" alt="" loading="lazy"></figure>` : i.scene ? `<div class="ph ${i.scene}"></div>` : ''}<h3>${i[0] || i.h}</h3><p>${i[1] || i.p}</p>${i.href ? `<a class="link-arrow" href="${i.href}">${i.cta}</a>` : ''}</article>`; }).join('')}</div></section>`,
   spec: ({ title, rows }) => `<section class="section"><h2 class="h-section">${title}</h2><dl class="spec">${rows.map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join('')}</dl></section>`,
   faq: ({ title, items }) => `<section class="section prose"><h2 class="h-section">${title}</h2>${items.map(i => `<details><summary>${i[0]}</summary><p>${i[1]}</p></details>`).join('')}</section>`,
   gallery: ({ title, imgs }) => `<section class="section">${title ? `<h2 class="h-section">${title}</h2>` : ''}<div class="gallery">${imgs.map(([src, alt]) => `<button type="button" class="g-item" aria-label="Enlarge photo"><img src="${src}" alt="${esc(alt)}" loading="lazy"></button>`).join('')}</div></section>`,
