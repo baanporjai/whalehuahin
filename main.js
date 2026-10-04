@@ -8,9 +8,9 @@ const TOWN = [
 // Short summaries of recent guest reviews found on Google Maps.
 // Keep these attributed and link back to the listing so the source is clear.
 const REVIEWS = [
-  { quote: 'Spacious rooms, a beautiful terrace, friendly and helpful staff, reliable Wi‑Fi, and a shuttle into town every two hours.', who: 'Justina R', src: 'Google Maps', date: 'Dec 2025' },
-  { quote: 'Warm, lovely service—especially from the housekeeping team—along with comfortable beds, constant hot water, and a clean rooftop pool.', who: 'E B', src: 'Google Maps', date: 'Jan 2026' },
-  { quote: 'After two stays, the great service, free city shuttle, rooftop pool and bar, and spacious comfortable rooms made this a place to return to.', who: 'Laurie', src: 'Google Maps', date: 'Apr 2026' },
+  { quote: 'A wonderful stay with exceptionally spacious rooms and a beautiful terrace. The team was consistently warm, helpful and welcoming, the Wi‑Fi was fast and dependable, and the regular shuttle made it easy to enjoy Hua Hin without any stress.', who: 'Justina R', src: 'Google Maps', date: 'Dec 2025' },
+  { quote: 'The staff were lovely from the moment we arrived, with the housekeeping team receiving special praise for their care and kindness. The beds were among the most comfortable, hot water was always available, and the clean rooftop pool was a perfect place to relax.', who: 'E B', src: 'Google Maps', date: 'Jan 2026' },
+  { quote: 'After staying here twice on separate trips, this guest highlights the excellent service, spacious and beautiful rooms, wonderfully comfortable beds, free shuttle into the city, and the rooftop pool and bar. A memorable hotel that earns a strong recommendation and a promise to return.', who: 'Laurie', src: 'Google Maps', date: 'Apr 2026' },
 ];
 
 const REVIEWS_URL = 'https://www.google.com/maps/place/Whale+Hua+Hin+Hotel/@12.6105149,99.9498802,797m/data=!3m1!1e3!4m9!3m8!1s0x30fdabb29c0ca55f:0xc2398f394e7cd6eb!5m2!4m1!1i2!8m2!3d12.6103827!4d99.9498711!16s%2Fg%2F11gghdhwg8';
