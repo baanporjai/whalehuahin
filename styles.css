@@ -430,3 +430,6 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 /* Square logo-style artwork inside a portrait/landscape slot: show it whole on its own background colour */
 .ph.fit,.media.fit{background:#0f3b7e}
 .ph.fit>img,.media.fit>img{display:block;width:100%;height:100%;object-fit:contain}
+.badge-wrap{padding-bottom:0}
+.badge{width:min(320px,100%);aspect-ratio:1;border-radius:24px}
+.badge-wrap+.section{padding-top:clamp(24px,4vw,48px)}
