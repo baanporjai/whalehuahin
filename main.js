@@ -105,7 +105,7 @@ const rv = $('#review-list');
 REVIEWS.forEach(r => {
   const draft = false;
   rv.append(el('figure', 'review reveal',
-    `${draft ? '<span class="tag">Placeholder</span>' : ''}<blockquote>“${esc(r.quote)}”</blockquote><figcaption>${esc(r.who)} · ${esc(r.src)} · ${esc(r.date)}</figcaption>`));
+    `<blockquote>“${esc(r.quote)}”</blockquote><figcaption>${esc(r.who)} · ${esc(r.src)} · ${esc(r.date)}</figcaption>`));
 });
 rv.insertAdjacentHTML('afterend', `<p class="section-foot"><a class="link-arrow" href="${REVIEWS_URL}" target="_blank" rel="noopener">Read more reviews on Google Maps</a></p>`);
 

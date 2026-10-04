@@ -433,3 +433,12 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .badge-wrap{padding-bottom:0}
 .badge{width:min(320px,100%);aspect-ratio:1;border-radius:24px}
 .badge-wrap+.section{padding-top:clamp(24px,4vw,48px)}
+
+/* Google rating summary */
+.rating-card{display:flex;align-items:center;gap:clamp(18px,3vw,36px);margin:0 0 40px;padding:22px 28px;background:#fff;border-radius:24px;box-shadow:0 14px 34px rgba(10,45,49,.07);width:fit-content;max-width:100%;flex-wrap:wrap}
+.rating-score{display:flex;align-items:center;gap:14px;margin:0}
+.rating-score .num{font:800 clamp(3rem,6vw,4.4rem)/1 var(--f-display);letter-spacing:-.04em}
+.stars{display:inline-block;font-size:1.7rem;letter-spacing:.12em;line-height:1;background:linear-gradient(90deg,#f4b400 90%,#d3dcda 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stars::before{content:"★★★★★"}
+.rating-line{margin:0;font-weight:600}
+.rating-sub{margin:0;color:var(--muted);font-size:.92rem}
