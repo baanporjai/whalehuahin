@@ -17,6 +17,7 @@ const SEO = {
   'rooms/premier-high-floor.html': ['Premier High Floor Room | Whale Hua Hin Hotel', 'Premier High Floor rooms at Whale Hua Hin: more light and open views from a higher floor, with the rooftop pool and free shuttle nearby.'],
   'rooms/jacuzzi-deluxe.html': ['Jacuzzi Deluxe Room in Hua Hin | Whale Hua Hin', 'A spacious Jacuzzi Deluxe room with a private Jacuzzi at Whale Hua Hin, made for slower moments together in Hua Hin.'],
   'rooms/two-bedroom-suite.html': ['Family Jacuzzi 2-Bedroom Suite Hua Hin | Whale', 'A two-bedroom family suite with a Jacuzzi at Whale Hua Hin, made for families and friends travelling together.'],
+  'rooms/duplex-suite.html': ['Duplex Suite in Hua Hin | Whale Hua Hin Hotel', 'A two-level Duplex Suite at Whale Hua Hin with floor-to-ceiling windows, a stone staircase, a dining area and a balcony with mountain views.'],
   'experiences/rooftop-pool.html': ['Rooftop Pool & Slide in Hua Hin | Whale Hua Hin', 'Swim, slide and take in the view at the Whale Hua Hin rooftop pool, with a pool slide and a rooftop bar for sunset.'],
   'experiences/rooftop-bar.html': ['Rooftop Bar in Hua Hin | Whale Hua Hin Hotel', 'Sunset drinks and easy bites at the Whale Hua Hin rooftop bar, above the city.'],
   'experiences/well-retreat.html': ['Well Retreat Massage in Hua Hin | Whale Hua Hin', 'Relax with a massage at Well Retreat, the in-hotel spa at Whale Hua Hin, without leaving the hotel.'],
@@ -54,7 +55,7 @@ const FOOT = (b) => `
 <footer class="site-footer">
   <img class="foot-logo" src="${b}assets/logo-white.webp" alt="Whale Hua Hin" width="120" height="83" loading="lazy">
   <div class="foot-cols">
-    <nav aria-label="Stay"><h3>Stay</h3><a href="${b}rooms/">All Rooms</a><a href="${b}rooms/jacuzzi-deluxe.html">Jacuzzi Deluxe</a><a href="${b}rooms/two-bedroom-suite.html">Two-Bedroom Suite</a><a href="${b}index.html#book">Book on Trip.com</a></nav>
+    <nav aria-label="Stay"><h3>Stay</h3><a href="${b}rooms/">All Rooms</a><a href="${b}rooms/jacuzzi-deluxe.html">Jacuzzi Deluxe</a><a href="${b}rooms/two-bedroom-suite.html">Two-Bedroom Suite</a><a href="${b}rooms/duplex-suite.html">Duplex Suite</a><a href="${b}index.html#book">Book on Trip.com</a></nav>
     <nav aria-label="Explore"><h3>Explore</h3><a href="${b}index.html#experiences">Experiences</a><a href="${b}hua-hin/">Hua Hin Guide</a><a href="${b}offers.html">Offers</a><a href="${b}experiences/well-retreat.html">Well Retreat</a></nav>
     <nav aria-label="Help"><h3>Help</h3><a href="${b}location.html">Location</a><a href="${b}shuttle.html">Shuttle Times</a><a href="${b}faq.html">FAQ &amp; Policies</a><a href="${b}contact.html">Contact</a></nav>
     <nav aria-label="Connect"><h3>Connect</h3><a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">Facebook</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">LINE / WhatsApp</a></nav>
@@ -71,7 +72,7 @@ const FOOT = (b) => `
 const P = n => `images/2026/${n}.webp`;
 const SCENE_IMG = {
   'photo-superior': 'superior-1', 'photo-room-premier': 'premier-tub', 'photo-jacuzzi': 'jacuzzi-tub', 'scene-family': 'suite-living',
-  'photo-rooftop': 'pool-day-wide', 'photo-rooftop-night': 'pool-sunset', 'scene-spa': 'spa-treatment', 'scene-breakfast': 'breakfast-spread',
+  'photo-duplex': 'duplex-living', 'photo-rooftop': 'pool-day-wide', 'photo-rooftop-night': 'pool-sunset', 'scene-spa': 'spa-treatment', 'scene-breakfast': 'breakfast-spread',
   'scene-lifestyle': 'model-window',
 };
 const HERO_IMG = { 'photo-rooftop': 'pool-day-hero', 'photo-superior': 'superior-2', 'photo-room-premier': 'premier-tub-2' };
@@ -158,6 +159,7 @@ room('superior', { name: 'Superior', eyebrow: 'Stay', scene: 'photo-superior', g
 room('premier-high-floor', { name: 'Premier High Floor', eyebrow: 'Stay', scene: 'photo-room-premier', gallery: [...gal(['premier-tub', 'premier-tub-2', 'premier-tub-3'], ''), ...['587710646_18341057323227842_6228865959943278826_n', '584367414_18341057305227842_7424491904617671801_n', '582429753_18341057296227842_3183918609453593408_n'].map(OLD('Premier_highfloor'))], lede: 'More light, open views and a little distance from the everyday.', head: 'Higher up, lighter inside.', text: ['Set on a higher floor, with more light and open views to settle into.'] });
 room('jacuzzi-deluxe', { name: 'Jacuzzi Deluxe', eyebrow: 'Stay', scene: 'photo-jacuzzi', gallery: gal(['jacuzzi-tub', 'jacuzzi-bed', 'jacuzzi-bed-2', 'jacuzzi-twin', 'jacuzzi-sink', 'jacuzzi-balcony'], ''), lede: 'A little time for two.', head: 'A spacious room with a private Jacuzzi.', text: ['Made for slower moments together: a spacious room with a private Jacuzzi of your own.'] });
 room('two-bedroom-suite', { name: 'Family Jacuzzi 2 Bedroom Suite', eyebrow: 'Stay', scene: 'scene-family', gallery: gal(['suite-living', 'suite-bed', 'suite-seaview', 'suite-seaview-2', 'suite-bed-teal'], ''), lede: 'Together, with room to breathe.', head: 'Two bedrooms, one easy stay.', text: ['A two-bedroom suite with a Jacuzzi, made for families and friends travelling together.'] });
+room('duplex-suite', { name: 'Duplex Suite', eyebrow: 'Stay', scene: 'photo-duplex', gallery: gal(['duplex-living', 'duplex-dining', 'duplex-stairs', 'duplex-bar', 'duplex-bed', 'duplex-bed-2', 'duplex-bath', 'duplex-tub', 'duplex-balcony'], ''), lede: 'Two levels, floor-to-ceiling windows and room to spread out.', head: 'Two levels of easy living.', text: ['A two-level suite with a stone feature staircase, floor-to-ceiling windows, a dining area and mini bar, a bedroom with a round bathtub, and a balcony with mountain views.'] });
 pages['rooms/index.html'] = {
   title: 'Rooms & Suites', eyebrow: 'Stay your way', h1: 'Room to make<br>yourself at home.', lede: 'From easy weekend stays to private Jacuzzi moments and two-bedroom space for everyone.',
   blocks: [['cards', { items: [
@@ -165,6 +167,7 @@ pages['rooms/index.html'] = {
     { scene: 'photo-room-premier', h: 'Premier High Floor', p: 'More light, open views and a little distance from the everyday.', href: 'premier-high-floor.html', cta: 'View Room' },
     { scene: 'photo-jacuzzi', h: 'Jacuzzi Deluxe', p: 'A spacious room with a private Jacuzzi made for slower moments together.', href: 'jacuzzi-deluxe.html', cta: 'View Jacuzzi Deluxe' },
     { scene: 'scene-family', h: 'Family Jacuzzi 2 Bedroom Suite', p: 'A two-bedroom suite made for families and friends.', href: 'two-bedroom-suite.html', cta: 'View Two-Bedroom Suite' },
+    { scene: 'photo-duplex', h: 'Duplex Suite', p: 'A two-level suite with floor-to-ceiling windows and a stone staircase.', href: 'duplex-suite.html', cta: 'View Duplex Suite' },
   ] }]],
 };
 
