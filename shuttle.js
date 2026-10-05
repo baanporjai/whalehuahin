@@ -6,12 +6,22 @@ const tabs = document.getElementById('tabs');
 const panel = document.getElementById('panel');
 const now = hotelNowMin();
 
+/* "10:15" + 5 -> "10:20" */
+const plusMin = (t, m) => { const x = timeMin(t) + m; return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0'); };
+
 function show(i) {
   const r = SHUTTLE.routes[i];
   [...tabs.children].forEach((b, j) => { b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; });
   const nextT = r.times.find(t => timeMin(t) >= now);
-  panel.innerHTML = `<h3>${esc(r.label)}</h3><p class="panel-sub">${esc(r.note)}</p>
-    <table><thead><tr><th scope="col">${i ? 'Leaves city center' : 'Leaves hotel'}</th><th scope="col"></th></tr></thead>
+  const head = `<h3>${esc(r.label)}</h3><p class="panel-sub">${esc(r.note)}</p>`;
+  if (r.kind === 'pickup') {
+    // One column per pick-up point: the same trip reaches each of them a few minutes apart.
+    panel.innerHTML = head + `<table class="multi"><thead><tr>${r.stops.map(s => `<th scope="col">${esc(s.label)}</th>`).join('')}<th scope="col"></th></tr></thead>
+      <tbody>${r.times.map(t => `<tr${t === nextT ? ' class="is-next"' : ''}>${r.stops.map(s => `<td>${plusMin(t, s.plus)}</td>`).join('')}<td>${t === nextT ? '<span class="pill">Next</span>' : ''}</td></tr>`).join('')}</tbody></table>`;
+    return;
+  }
+  panel.innerHTML = head + `<p class="stops-title">Drop-off points</p><ul class="stops">${r.stops.map(s => `<li>${esc(s.label)}</li>`).join('')}</ul>
+    <table><thead><tr><th scope="col">Leaves hotel</th><th scope="col"></th></tr></thead>
     <tbody>${r.times.map(t => `<tr${t === nextT ? ' class="is-next"' : ''}><td>${t}</td><td>${t === nextT ? '<span class="pill">Next</span>' : ''}</td></tr>`).join('')}</tbody></table>`;
 }
 
