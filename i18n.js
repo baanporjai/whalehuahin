@@ -243,7 +243,7 @@
     ['Reserve your seat in advance.', 'กรุณาจองที่นั่งล่วงหน้า', '请提前预订座位。', 'Бронируйте место заранее.'],
     ['Next from hotel ·', 'รอบถัดไปจากโรงแรม ·', '酒店下一班 ·', 'Ближайший рейс от отеля ·'],
     ['First trip tomorrow ·', 'รอบแรกพรุ่งนี้ ·', '明日首班 ·', 'Первый рейс завтра ·'],
-    ['To City Center', 'ไปใจกลางเมือง', '前往市中心', 'В центр города'],
+    ['To City Center', 'ออกจากโรงแรม', '前往市中心', 'В центр города'],
     ['To Whale Hua Hin', 'กลับโรงแรม Whale Hua Hin', '返回 Whale Hua Hin', 'В Whale Hua Hin'],
     ['Drop-off at City Center (Clock Tower), Hua Hin Beach or Market Village', 'ส่งที่ใจกลางเมือง (หอนาฬิกา) ชายหาดหัวหิน หรือมาร์เก็ตวิลเลจ', '可在市中心（钟楼）、华欣海滩或 Market Village 下车', 'Высадка: центр города (отель Baan Manthana), пляж Хуахина или Market Village'],
     ['Pick-up at City Center (Clock Tower), Hua Hin Beach or Market Village', 'รับที่ใจกลางเมือง (หอนาฬิกา) ชายหาดหัวหิน หรือมาร์เก็ตวิลเลจ', '可在市中心（钟楼）、华欣海滩或 Market Village 上车', 'Посадка: центр города (отель Baan Manthana), пляж Хуахина или Market Village'],
