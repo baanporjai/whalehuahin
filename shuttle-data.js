@@ -6,14 +6,14 @@ const SHUTTLE = {
   reserve: 'Reserve your seat at the lobby, or call +66 32 522 202, at least 30 minutes before the shuttle time.',
   routes: [
     /* The bus drops guests at three places; the times are when it leaves the hotel. */
-    { id: 'out', label: 'To City Center', note: 'Drop-off at City Center (Baan Manthana Hotel), Hua Hin Beach or Market Village', kind: 'dropoff',
+    { id: 'out', label: 'To City Center', note: 'Drop-off at City Center (Clock Tower), Hua Hin Beach or Market Village', kind: 'dropoff',
       times: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
-      stops: [{ label: 'City Center (Baan Manthana Hotel)' }, { label: 'Hua Hin Beach' }, { label: 'Market Village (shopping mall)' }] },
+      stops: [{ label: 'City Center (Clock Tower)' }, { label: 'Hua Hin Beach' }, { label: 'Market Village (shopping mall)' }] },
     /* `times` are the City Center pick-up times; `plus` is how many minutes later the bus reaches each stop
        (the bus leaves the hotel at 10:00, 12:00 ... so City Center is +15, the beach +20, Market Village +35). */
-    { id: 'back', label: 'To Whale Hua Hin', note: 'Pick-up at City Center (Baan Manthana Hotel), Hua Hin Beach or Market Village', kind: 'pickup',
+    { id: 'back', label: 'To Whale Hua Hin', note: 'Pick-up at City Center (Clock Tower), Hua Hin Beach or Market Village', kind: 'pickup',
       times: ['10:15', '12:15', '14:15', '16:15', '18:15', '20:15', '22:15'],
-      stops: [{ label: 'City Center (Baan Manthana Hotel)', plus: 0 }, { label: 'Hua Hin Beach', plus: 5 }, { label: 'Market Village (shopping mall)', plus: 20 }] },
+      stops: [{ label: 'City Center (Clock Tower)', plus: 0 }, { label: 'Hua Hin Beach', plus: 5 }, { label: 'Market Village (shopping mall)', plus: 20 }] },
   ],
 };
 
