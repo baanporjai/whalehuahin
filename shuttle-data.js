@@ -7,7 +7,7 @@ const SHUTTLE = {
   routes: [
     /* The bus drops guests at three places; the times are when it leaves the hotel. */
     { id: 'out', label: 'To City Center', note: 'Drop-off at City Center (Clock Tower), Hua Hin Beach or Market Village', kind: 'dropoff',
-      times: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+      times: ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
       /* `plus` = estimated minutes after leaving the hotel. */
       stops: [{ label: 'City Center (Clock Tower)', plus: 15 }, { label: 'Hua Hin Beach', plus: 15 }, { label: 'Market Village (shopping mall)', plus: 20 }] },
     /* `times` are the City Center pick-up times; `plus` is how many minutes later the bus reaches each stop
