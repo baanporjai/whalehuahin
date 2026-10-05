@@ -451,3 +451,8 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .route-panel table.multi td{font-size:1.3rem;padding-right:10px}
 .route-panel table.multi td:last-child,.route-panel table.multi th:last-child{width:1%;white-space:nowrap}
 @media (max-width:520px){.route-panel table.multi td{font-size:1.05rem}.route-panel table.multi th{font-size:.7rem}}
+
+/* Shuttle remark under the timetable */
+.remark{max-width:640px;margin-top:22px;padding:18px 22px;border-left:4px solid var(--aqua);background:#fff;border-radius:0 16px 16px 0;box-shadow:0 10px 26px rgba(10,45,49,.06)}
+.remark-title{font:600 .72rem var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 .4em}
+.remark p:last-child{margin:0;color:var(--muted);font-size:.98rem}

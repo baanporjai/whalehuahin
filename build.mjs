@@ -55,7 +55,7 @@ const FOOT = (b) => `
 <footer class="site-footer">
   <img class="foot-logo" src="${b}assets/logo-white.webp" alt="Whale Hua Hin" width="120" height="83" loading="lazy">
   <div class="foot-cols">
-    <nav aria-label="Stay"><h3>Stay</h3><a href="${b}rooms/">All Rooms</a><a href="${b}rooms/jacuzzi-deluxe.html">Jacuzzi Deluxe</a><a href="${b}rooms/two-bedroom-suite.html">Two-Bedroom Suite</a><a href="${b}rooms/duplex-suite.html">Duplex Suite</a><a href="${b}index.html#book">Book on Trip.com</a></nav>
+    <nav aria-label="Stay"><h3>Stay</h3><a href="${b}rooms/">All Rooms</a><a href="${b}rooms/superior.html">Superior</a><a href="${b}rooms/premier-high-floor.html">Premier High Floor</a><a href="${b}rooms/jacuzzi-deluxe.html">Jacuzzi Deluxe</a><a href="${b}rooms/two-bedroom-suite.html">Two-Bedroom Suite</a><a href="${b}rooms/duplex-suite.html">Duplex Suite</a></nav>
     <nav aria-label="Explore"><h3>Explore</h3><a href="${b}index.html#experiences">Experiences</a><a href="${b}hua-hin/">Hua Hin Guide</a><a href="${b}offers.html">Offers</a><a href="${b}experiences/well-retreat.html">Well Retreat</a></nav>
     <nav aria-label="Help"><h3>Help</h3><a href="${b}location.html">Location</a><a href="${b}shuttle.html">Shuttle Times</a><a href="${b}faq.html">FAQ &amp; Policies</a><a href="${b}contact.html">Contact</a></nav>
     <nav aria-label="Connect"><h3>Connect</h3><a href="https://www.facebook.com/whalehuahinhotel" target="_blank" rel="noopener">Facebook</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="https://line.me/R/ti/p/@whalehuahinhotel" target="_blank" rel="noopener">LINE Official Account</a></nav>

@@ -20,9 +20,10 @@ function show(i) {
       <tbody>${r.times.map(t => `<tr${t === nextT ? ' class="is-next"' : ''}>${r.stops.map(s => `<td>${plusMin(t, s.plus)}</td>`).join('')}<td>${t === nextT ? '<span class="pill">Next</span>' : ''}</td></tr>`).join('')}</tbody></table>`;
     return;
   }
-  panel.innerHTML = head + `<p class="stops-title">Drop-off points</p><ul class="stops">${r.stops.map(s => `<li>${esc(s.label)}</li>`).join('')}</ul>
-    <table><thead><tr><th scope="col">Leaves hotel</th><th scope="col"></th></tr></thead>
-    <tbody>${r.times.map(t => `<tr${t === nextT ? ' class="is-next"' : ''}><td>${t}</td><td>${t === nextT ? '<span class="pill">Next</span>' : ''}</td></tr>`).join('')}</tbody></table>`;
+  // Trip into town: the bus leaves the hotel at the listed time and reaches each drop-off point a few minutes later.
+  panel.innerHTML = head + `<p class="stops-title">Estimated arrival at each drop-off point</p>
+    <table class="multi"><thead><tr><th scope="col">Leaves hotel</th>${r.stops.map(s => `<th scope="col">${esc(s.label)}</th>`).join('')}<th scope="col"></th></tr></thead>
+    <tbody>${r.times.map(t => `<tr${t === nextT ? ' class="is-next"' : ''}><td>${t}</td>${r.stops.map(s => `<td>${plusMin(t, s.plus)}</td>`).join('')}<td>${t === nextT ? '<span class="pill">Next</span>' : ''}</td></tr>`).join('')}</tbody></table>`;
 }
 
 SHUTTLE.routes.forEach((r, i) => {
