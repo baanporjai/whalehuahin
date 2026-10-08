@@ -3,8 +3,9 @@
    (crawlers, slow/failed requests): if the request fails nothing changes. A value left empty in the back office is hidden. */
 (() => {
   const API = 'https://app.whalehuahin.com/api/public/room-types';
-  const isIndex = !!document.querySelector('.info-cards');
   const slugHere = location.pathname.split('/').filter(Boolean).pop().replace(/\.html$/i, '');
+  // The Rooms page itself (a room page also has .info-cards now: its "Explore other rooms" row)
+  const isIndex = slugHere === 'rooms' || slugHere === 'index';
   const UNIT = { en: 'm²', th: 'ตร.ม.', zh: '平方米', ru: 'м²' };
   const AMENITIES_TITLE = { en: 'In-room details', th: 'รายละเอียดในห้อง', zh: '客房设施', ru: 'В номере' };
   const cache = {};
@@ -120,6 +121,7 @@
     else {
       const room = rooms.find(r => r.slug === slugHere);
       if (room) { applyRoom(room); applyAmenities(room); }
+      applyIndex(rooms.filter(r => r.slug !== slugHere)); // the "Explore other rooms" row follows the back office too
     }
   }
 
