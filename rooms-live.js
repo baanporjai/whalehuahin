@@ -6,6 +6,7 @@
   const isIndex = !!document.querySelector('.info-cards');
   const slugHere = location.pathname.split('/').filter(Boolean).pop().replace(/\.html$/i, '');
   const UNIT = { en: 'm²', th: 'ตร.ม.', zh: '平方米', ru: 'м²' };
+  const AMENITIES_TITLE = { en: 'In-room details', th: 'รายละเอียดในห้อง', zh: '客房设施', ru: 'В номере' };
   const cache = {};
   let applied = null;
 
@@ -93,6 +94,22 @@
     }
   }
 
+  /* In-room details: groups of items; removed again when the room has none. */
+  function applyAmenities(room) {
+    document.querySelectorAll('section.amenities').forEach(s => s.remove());
+    const groups = room.amenities || [];
+    if (!groups.length) return;
+    const section = el('section', { class: 'section amenities' }, [
+      el('h2', { class: 'h-section' }, [AMENITIES_TITLE[currentLang()]]),
+      el('div', { class: 'amenity-groups' }, groups.map(g => el('div', { class: 'amenity-group' }, [
+        g.title ? el('h3', {}, [g.title]) : '',
+        el('ul', {}, g.items.map(i => el('li', {}, [i]))),
+      ]))),
+    ]);
+    const anchor = document.querySelector('dl.spec')?.closest('section') || document.querySelector('.gallery')?.closest('section');
+    if (anchor) anchor.after(section);
+  }
+
   async function run() {
     const lang = currentLang();
     if (applied === lang) return;
@@ -102,7 +119,7 @@
     if (isIndex) applyIndex(rooms);
     else {
       const room = rooms.find(r => r.slug === slugHere);
-      if (room) applyRoom(room);
+      if (room) { applyRoom(room); applyAmenities(room); }
     }
   }
 
