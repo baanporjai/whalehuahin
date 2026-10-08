@@ -6,7 +6,7 @@ import { dirname } from 'node:path';
 const SITE = 'https://whalehuahin.com';
 const TODAY = '2026-10-04';
 // Pages still holding [placeholder] copy: keep them out of the index and the sitemap until real text is in.
-const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/night-markets.html']);
+const NOINDEX = new Set(['privacy.html', 'terms.html']);
 // Cloudflare serves these without .html (and folders with a trailing slash); the old .html URLs 307-redirect, so canonical/sitemap use the final form.
 const canon = p => '/' + p.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
 const DEFAULT_OG = 'images/2026/pool-day-hero.webp';
@@ -208,7 +208,15 @@ pages['hua-hin/where-to-eat.html'] = { title: 'Where to Eat in Hua Hin', eyebrow
   ['spec', { title: 'Good to know', rows: [['Where', 'Hua Hin Soi 51, Hua Hin'], ['Open', 'Daily 11:00–22:00 · please confirm before you go'], ['Known for', 'Hong Kong noodles, dry rice soup, crispy roast pork, chicken rice'], ['Phone', '<a href="tel:+66938720003">093 872 0003</a>'], ['Online', '<a href="https://www.facebook.com/guaypochana/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/guaypochana/" target="_blank" rel="noopener">Instagram</a>']] }],
   ['cta', { text: 'See it on the map.', href: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%81%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%A0%E0%B8%8A%E0%B8%99%E0%B8%B2+%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%AB%E0%B8%B4%E0%B8%99', label: 'Find on Google Maps' }],
 ] };
-art('night-markets', { name: 'Markets After Sunset', scene: 't2', lede: 'Street food, crafts and slow strolls.' });
+pages['hua-hin/night-markets.html'] = { title: 'Markets After Sunset', eyebrow: 'Hello, Hua Hin', h1: 'Markets After Sunset', lede: 'Street food, crafts and slow strolls.', blocks: [
+  ['photo', { scene: 'photo-rooftop-night', label: 'Markets After Sunset' }],
+  ['prose', { text: ['When the sun goes down, Hua Hin heads to the markets. Two are worth an evening: the Night Market in the middle of town, and Cicada Market for art, music and food at the weekend.'] }],
+  ['prose', { title: 'Hua Hin Night Market', text: ['The classic evening stop in the middle of town, where Decha Nuchit Road meets Phetkasem Road. Seafood, grilled snacks, desserts and souvenirs line the street, and it is open every night. Check the last shuttle time before you head back.'] }],
+  ['prose', { title: 'Cicada Market', text: ['A weekend market with handmade crafts, art, live music and street food in a garden setting. Entry is free and it is liveliest between 7 and 9 PM. Ask the front desk how to get there.'] }],
+  ['spec', { title: 'Good to know', rows: [['Hua Hin Night Market', 'Daily, about 6 PM to midnight'], ['Cicada Market', 'Fri–Sun, 4–11 PM · free entry']] }],
+  ['prose', { text: ['Opening hours can change, so please confirm before you go.'] }],
+  ['cta', { text: 'Getting there is easy with the free shuttle.', href: '../shuttle.html', label: 'View shuttle times' }],
+] };
 
 pages['hua-hin/index.html'] = { title: 'Hua Hin Guide', eyebrow: 'Step out', h1: 'Hello, Hua Hin.', lede: 'Beaches, markets, local food and easy days by the sea—discover more of Hua Hin from Whale.', blocks: [['cards', { items: [
   { scene: 't1', h: 'Where to Eat in Hua Hin', p: 'Local favourites worth a short trip into town.', href: 'where-to-eat.html', cta: 'Read guide' },
