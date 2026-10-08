@@ -6,7 +6,7 @@ import { dirname } from 'node:path';
 const SITE = 'https://whalehuahin.com';
 const TODAY = '2026-10-04';
 // Pages still holding [placeholder] copy: keep them out of the index and the sitemap until real text is in.
-const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/night-markets.html', 'hua-hin/three-easy-days.html']);
+const NOINDEX = new Set(['privacy.html', 'terms.html', 'hua-hin/night-markets.html']);
 // Cloudflare serves these without .html (and folders with a trailing slash); the old .html URLs 307-redirect, so canonical/sitemap use the final form.
 const canon = p => '/' + p.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
 const DEFAULT_OG = 'images/2026/pool-day-hero.webp';
@@ -192,6 +192,16 @@ pages['experiences/play-and-unwind.html'].blocks.splice(1, 1);
 
 /* ---------- Hua Hin ---------- */
 const art = (slug, o) => pages[`hua-hin/${slug}.html`] = { title: o.name, eyebrow: 'Hello, Hua Hin', h1: o.name, lede: o.lede, blocks: [['photo', { scene: o.scene, label: o.name }], ['prose', { text: ['[Write this guide: add real places, tips and distances from the hotel. Mention the free shuttle where it helps.]'] }], ['cta', { text: 'Getting there is easy with the free shuttle.', href: '../shuttle.html', label: 'View shuttle times' }]] };
+pages['hua-hin/three-easy-days.html'] = { title: 'Three Easy Days in Hua Hin', eyebrow: 'Hello, Hua Hin', h1: 'Three Easy Days in Hua Hin', lede: 'A simple plan for a first visit.', blocks: [
+  ['photo', { scene: 'photo-rooftop', label: 'Three Easy Days in Hua Hin' }],
+  ['prose', { text: ['Three unhurried days: a little town, a little sea and plenty of time by the pool. We are about 5 km from Hua Hin town and the free shuttle runs to the city center, so you can leave the driving behind. Reserve your seat in advance.'] }],
+  ['prose', { title: 'Day 1 · Town and sea', text: ['Late morning: take the free shuttle into town and have lunch at Guay Pochana, a Chinese-style eatery known for its Hong Kong noodles and crispy roast pork.', 'Afternoon: stroll to Hua Hin railway station, one of the town’s best-known landmarks, then walk along the beach once the sun softens.', 'Evening: dinner at the Hua Hin Night Market, then head back to the hotel. Check the last shuttle time before you go.'] }],
+  ['prose', { title: 'Day 2 · A slow day at Whale', text: ['Morning: breakfast, then the rooftop pool and slide, with a massage at Well Retreat if you feel like it.', 'Afternoon: a short outing to Khao Takiab, where monkeys greet you at the temple and the hilltop view looks out over the coast. Entry is free; keep food out of sight.', 'Evening: sunset drinks at the rooftop bar.'] }],
+  ['prose', { title: 'Day 3 · Wine, markets and a slow goodbye', text: ['Morning: choose one. Hua Hin Hills Vineyard for wine tasting and a quiet lunch among the vines, or Black Mountain Water Park if you are travelling with children.', 'Last evening: if your stay includes a Friday, Saturday or Sunday, spend it at Cicada Market with art, live music and street food.', 'Before you go: pick up snacks and gifts in town, then check out and head home with an easy mind.'] }],
+  ['spec', { title: 'Good to know', rows: [['Hua Hin Night Market', 'Daily, about 6 PM to midnight'], ['Cicada Market', 'Fri–Sun, 4–11 PM · free entry'], ['Khao Takiab temple', 'Daily, about 9 AM–5:30 PM · free entry'], ['Hua Hin Hills Vineyard', 'Daily, 8:30 AM–6:30 PM · bistro 11 AM–5:30 PM'], ['Black Mountain Water Park', '11 AM–5 PM · closed Wednesdays']] }],
+  ['prose', { text: ['Opening hours can change, so please confirm before you go.'] }],
+  ['cta', { text: 'Getting there is easy with the free shuttle.', href: '../shuttle.html', label: 'View shuttle times' }],
+] };
 pages['hua-hin/where-to-eat.html'] = { title: 'Where to Eat in Hua Hin', eyebrow: 'Hello, Hua Hin', h1: 'Where to Eat in Hua Hin', lede: 'Local favourites worth a short trip into town.', blocks: [
   ['badge', { src: P('guay-pochana'), alt: 'Guay Pochana (ก๊วยโภชนา) logo' }],
   ['prose', { title: 'Guay Pochana', text: ['A Chinese-style eatery on Hua Hin Soi 51, known for its Hong Kong noodles, dry rice soup, crispy roast pork and chicken rice. Air-conditioned and easy for a relaxed breakfast or lunch.', 'Recommended by our owner.'] }],
@@ -199,7 +209,7 @@ pages['hua-hin/where-to-eat.html'] = { title: 'Where to Eat in Hua Hin', eyebrow
   ['cta', { text: 'See it on the map.', href: 'https://www.google.com/maps/search/?api=1&query=%E0%B8%81%E0%B9%8A%E0%B8%A7%E0%B8%A2%E0%B9%82%E0%B8%A0%E0%B8%8A%E0%B8%99%E0%B8%B2+%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%AB%E0%B8%B4%E0%B8%99', label: 'Find on Google Maps' }],
 ] };
 art('night-markets', { name: 'Markets After Sunset', scene: 't2', lede: 'Street food, crafts and slow strolls.' });
-art('three-easy-days', { name: 'Three Easy Days in Hua Hin', scene: 't3', lede: 'A simple plan for a first visit.' });
+
 pages['hua-hin/index.html'] = { title: 'Hua Hin Guide', eyebrow: 'Step out', h1: 'Hello, Hua Hin.', lede: 'Beaches, markets, local food and easy days by the sea—discover more of Hua Hin from Whale.', blocks: [['cards', { items: [
   { scene: 't1', h: 'Where to Eat in Hua Hin', p: 'Local favourites worth a short trip into town.', href: 'where-to-eat.html', cta: 'Read guide' },
   { scene: 't2', h: 'Markets After Sunset', p: 'Street food, crafts and slow strolls.', href: 'night-markets.html', cta: 'Read guide' },
