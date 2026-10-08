@@ -314,7 +314,7 @@ p{margin:0 0 1em}
 
 /* Mobile */
 @media (max-width:720px){
-  body{font-size:16px;padding-bottom:64px}
+  body{font-size:16px;padding-bottom:52px}
   .header-end .btn{display:none}
   .brand span b{display:none}
   main{display:flex;flex-direction:column}
@@ -342,9 +342,9 @@ p{margin:0 0 1em}
   .spec div{flex-direction:column;gap:2px}
   .spec dt{flex:none}
   .page-hero{padding-top:110px}
-  .sticky-bar{display:grid;grid-template-columns:1fr 1fr 1.4fr;align-items:center;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;padding:10px 14px;box-shadow:0 -4px 20px rgba(10,45,49,.12)}
-  .sticky-bar a:not(.btn){text-align:center;font-weight:600;text-decoration:none;padding:.6em}
-  .sticky-bar .btn{padding:.8em 1em}
+  .sticky-bar{display:grid;grid-template-columns:1.5fr .7fr 1.1fr;align-items:center;gap:6px;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;padding:6px 12px calc(6px + env(safe-area-inset-bottom));font-size:.85rem;box-shadow:0 -4px 20px rgba(10,45,49,.12)}
+  .sticky-bar a:not(.btn){text-align:center;font-weight:600;text-decoration:none;padding:.4em;white-space:nowrap}
+  .sticky-bar .btn{padding:.6em .8em;font-size:.85rem;white-space:nowrap}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
