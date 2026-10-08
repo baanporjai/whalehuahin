@@ -145,6 +145,7 @@ ${NOINDEX.has(path) ? '<meta name="robots" content="noindex, follow">' : ''}
 <script src="${b}lightbox.js"></script>
 <script src="${b}i18n.js"></script>
 ${path.startsWith('rooms/') ? `<script src="${b}rooms-live.js" defer></script>
+` : ''}${path === 'experiences/well-retreat.html' ? `<script src="${b}spa-live.js" defer></script>
 ` : ''}</body>
 </html>
 `;
