@@ -2,9 +2,16 @@
 // Copy comes from the Home draft where it exists; anything in [brackets] is a placeholder to replace with real hotel info.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const SITE = 'https://whalehuahin.com';
-const TODAY = '2026-10-04';
+const TODAY = new Date().toISOString().slice(0, 10);
+// <lastmod> = the day the page's own file last really changed (git), or today if it has uncommitted changes or is new.
+const git = cmd => { try { return execSync('git ' + cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch { return ''; } };
+const lastmod = file => {
+  if (git(`diff --numstat -- "${file}"`) || !git(`ls-files -- "${file}"`)) return TODAY;
+  return git(`log -1 --format=%cs -- "${file}"`) || TODAY;
+};
 // Pages still holding [placeholder] copy: keep them out of the index and the sitemap until real text is in.
 const NOINDEX = new Set(['privacy.html', 'terms.html']);
 // Cloudflare serves these without .html (and folders with a trailing slash); the old .html URLs 307-redirect, so canonical/sitemap use the final form.
@@ -244,7 +251,7 @@ for (const [p, v] of Object.entries(pages)) {
   if (/privacy|terms|contact/.test(p)) { page(p, v); continue; }
   v.blocks = withBook(p, v.blocks); page(p, v);
 }
-const urls = ['index.html', 'shuttle.html', ...Object.keys(pages)].filter(p => !NOINDEX.has(p)).map(p => `  <url><loc>${SITE}${canon(p)}</loc><lastmod>${TODAY}</lastmod></url>`).join('\n');
+const urls = ['index.html', 'shuttle.html', ...Object.keys(pages)].filter(p => !NOINDEX.has(p)).map(p => `  <url><loc>${SITE}${canon(p)}</loc><lastmod>${lastmod(p)}</lastmod></url>`).join('\n');
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 writeFileSync('robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: https://whalehuahin.com/sitemap.xml\n');
 console.log(Object.keys(pages).length, 'pages written');
