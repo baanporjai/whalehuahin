@@ -127,7 +127,7 @@ p{margin:0 0 1em}
 .room-tag{font:600 1.15rem var(--f-display);color:var(--blush)}
 .room .from{font-size:.85rem;opacity:1}
 .room-feature{grid-column:span 7;grid-row:span 2;min-height:640px}
-.room-premier,.room-superior{grid-column:span 5}
+.room-premier,.room-jacuzzi{grid-column:span 5}
 .room-family{grid-column:1/-1;min-height:440px}
 .room-family::after{background:linear-gradient(90deg,rgba(10,45,49,.85),rgba(10,45,49,.05) 70%)}
 .room-family{align-items:center}
@@ -302,7 +302,7 @@ p{margin:0 0 1em}
   .story,.shuttle,.play,.bar-top{grid-template-columns:1fr}
   .collage{max-width:560px}
   .room-feature{grid-column:1/-1;grid-row:auto;min-height:480px}
-  .room-premier,.room-superior{grid-column:span 6}
+  .room-premier,.room-jacuzzi{grid-column:span 6}
   .pair{grid-template-columns:1fr}
   .review-list,.town-list{grid-template-columns:1fr}
   .town-list .ph{aspect-ratio:16/10}
@@ -332,7 +332,7 @@ p{margin:0 0 1em}
   .tiles::-webkit-scrollbar{display:none}
   .tiles li{flex:0 0 70%;scroll-snap-align:start}
   .tiles li:nth-child(even){transform:none}
-  .room-premier,.room-superior{grid-column:1/-1}
+  .room-premier,.room-jacuzzi{grid-column:1/-1}
   .room{min-height:360px}
   .mosaic{grid-template-columns:1fr;grid-template-rows:none;height:auto}
   .mosaic figure,.mosaic figure:first-child{grid-row:auto;aspect-ratio:16/10}
