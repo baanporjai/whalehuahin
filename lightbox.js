@@ -1,7 +1,8 @@
 /* Photo viewer for .gallery grids: click (or Enter) to enlarge, ←/→ to browse, Esc to close, swipe on touch. */
 (() => {
-  const items = [...document.querySelectorAll('.gallery .g-item')];
+  let items = [...document.querySelectorAll('.gallery .g-item')];
   if (!items.length) return;
+  const collect = () => { items = [...document.querySelectorAll('.gallery .g-item')]; };
 
   const lb = document.createElement('div');
   lb.className = 'lb';
@@ -45,7 +46,14 @@
     if (opener) opener.focus();
   }
 
-  items.forEach((b, n) => b.addEventListener('click', () => open(n, b)));
+  // delegated, so photos added later (rooms-live.js) open in the viewer too
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('.gallery .g-item');
+    if (!b) return;
+    collect();
+    const n = items.indexOf(b);
+    if (n >= 0) open(n, b);
+  });
   lb.querySelector('.lb-close').addEventListener('click', close);
   lb.querySelector('.lb-prev').addEventListener('click', () => show(i - 1));
   lb.querySelector('.lb-next').addEventListener('click', () => show(i + 1));

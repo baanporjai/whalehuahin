@@ -137,7 +137,8 @@ ${NOINDEX.has(path) ? '<meta name="robots" content="noindex, follow">' : ''}
 </main>${FOOT(b)}
 <script src="${b}lightbox.js"></script>
 <script src="${b}i18n.js"></script>
-</body>
+${path.startsWith('rooms/') ? `<script src="${b}rooms-live.js" defer></script>
+` : ''}</body>
 </html>
 `;
   mkdirSync(dirname(path), { recursive: true });
