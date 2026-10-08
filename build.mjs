@@ -193,7 +193,7 @@ exp('well-retreat', { name: 'Well Retreat', eyebrow: 'Time for yourself', h1: 'S
 exp('dining', { name: 'Dining', eyebrow: 'Mornings at Whale', h1: 'Start easy.', scene: 'scene-breakfast', lede: 'Breakfast favourites, fresh flavours and nowhere you need to rush to.', text: ['[Breakfast hours, style and menu highlights]'], extra: [['gallery', { title: 'Gallery', imgs: gal(['restaurant-1', 'model-lunch', 'model-pizza', 'restaurant-2', 'pad-thai', 'tea', 'cafe-counter', 'matcha', 'model-cafe'], 'Dining at Whale') }]] });
 exp('play-and-unwind', { name: 'Play & Unwind', eyebrow: 'A little more to do', h1: 'Play a little.<br>Stay a little longer.', scene: 'scene-theater', lede: 'Movie nights, a friendly round of pool or something different at the archery range.', text: [''], extra: [['cards', { items: [
   { scene: 'scene-theater', h: 'Theater Room', p: 'Sit back and make it movie night.' },
-  { scene: 'photo-pooltable', h: 'Pool Table', p: 'A little friendly competition.' },
+  { scene: 'photo-pooltable', h: 'Pool Table', p: 'A little friendly competition. Free to play, just take turns and share the table.' },
   { scene: 'scene-archery', h: 'Archery', p: 'Take aim and try something different.' }] }], ['gallery', { title: 'Fitness & Gym', imgs: gal(['gym-1', 'gym-2'], 'Fitness room') }]] });
 pages['experiences/play-and-unwind.html'].blocks.splice(1, 1);
 
