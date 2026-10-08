@@ -153,10 +153,17 @@ const pages = {};
 
 /* ---------- Rooms ---------- */
 const roomSpec = [['Size', '[sqm — to confirm]'], ['Bed', '[bed type — to confirm]'], ['Sleeps', '[guests — to confirm]'], ['View', '[view — to confirm]']];
+const ROOM_CARDS = [
+  { slug: 'superior', scene: 'photo-superior', h: 'Superior', p: 'Everything you need for a comfortable Hua Hin stay.', cta: 'View Room' },
+  { slug: 'premier-high-floor', scene: 'photo-room-premier', h: 'Premier High Floor', p: 'More light, open views and a little distance from the everyday.', cta: 'View Room' },
+  { slug: 'jacuzzi-deluxe', scene: 'photo-jacuzzi', h: 'Jacuzzi Deluxe', p: 'A spacious room with a private Jacuzzi made for slower moments together.', cta: 'View Jacuzzi Deluxe' },
+  { slug: 'two-bedroom-suite', scene: 'scene-family', h: 'Family Jacuzzi 2 Bedroom Suite', p: 'A two-bedroom suite made for families and friends.', cta: 'View Two-Bedroom Suite' },
+  { slug: 'duplex-suite', scene: 'photo-duplex', h: 'Duplex Suite', p: 'A two-level suite with floor-to-ceiling windows and a stone staircase.', cta: 'View Duplex Suite' },
+];
 const OLD = d => f => ['images/' + d + '/' + f + '.webp', ''];
 const room = (slug, o) => pages[`rooms/${slug}.html`] = {
   title: o.name, eyebrow: o.eyebrow, h1: o.name, lede: o.lede, desc: o.lede,
-  blocks: [['photo', { scene: o.scene, label: o.name }], ['prose', { title: o.head, text: o.text }], ['gallery', { title: 'Inside the room', imgs: o.gallery.map(([src]) => [src, o.name]) }], ['spec', { title: 'Room details', rows: roomSpec }], ['prose', { text: 'Rates are shown live in our booking engine, so you always see the current price for your dates.' }]],
+  blocks: [['photo', { scene: o.scene, label: o.name }], ['prose', { title: o.head, text: o.text }], ['gallery', { title: 'Inside the room', imgs: o.gallery.map(([src]) => [src, o.name]) }], ['spec', { title: 'Room details', rows: roomSpec }], ['prose', { text: 'Rates are shown live in our booking engine, so you always see the current price for your dates.' }], ['cards', { title: 'Explore other rooms', items: ROOM_CARDS.filter(c => c.slug !== slug).map(({ slug: s, ...c }) => ({ ...c, href: s + '.html' })) }]],
 };
 room('superior', { name: 'Superior', eyebrow: 'Stay', scene: 'photo-superior', gallery: gal(['superior-1', 'superior-2', 'superior-twin', 'superior-desk', 'superior-bed', 'superior-bath'], ''), lede: 'Everything you need for a comfortable Hua Hin stay.', head: 'An easy place to land.', text: ['A comfortable base for a weekend by the sea, with the rooftop pool and shuttle just a few steps away.'] });
 room('premier-high-floor', { name: 'Premier High Floor', eyebrow: 'Stay', scene: 'photo-room-premier', gallery: [...gal(['premier-tub', 'premier-tub-2', 'premier-tub-3'], ''), ...['587710646_18341057323227842_6228865959943278826_n', '584367414_18341057305227842_7424491904617671801_n', '582429753_18341057296227842_3183918609453593408_n'].map(OLD('Premier_highfloor'))], lede: 'More light, open views and a little distance from the everyday.', head: 'Higher up, lighter inside.', text: ['Set on a higher floor, with more light and open views to settle into.'] });
@@ -165,13 +172,7 @@ room('two-bedroom-suite', { name: 'Family Jacuzzi 2 Bedroom Suite', eyebrow: 'St
 room('duplex-suite', { name: 'Duplex Suite', eyebrow: 'Stay', scene: 'photo-duplex', gallery: gal(['duplex-living', 'duplex-dining', 'duplex-stairs', 'duplex-bar', 'duplex-bed', 'duplex-bed-2', 'duplex-bath', 'duplex-tub', 'duplex-balcony'], ''), lede: 'Two levels, floor-to-ceiling windows and room to spread out.', head: 'Two levels of easy living.', text: ['A two-level suite with a stone feature staircase, floor-to-ceiling windows, a dining area and mini bar, a bedroom with a round bathtub, and a balcony with mountain views.'] });
 pages['rooms/index.html'] = {
   title: 'Rooms & Suites', eyebrow: 'Stay your way', h1: 'Room to make<br>yourself at home.', lede: 'From easy weekend stays to private Jacuzzi moments and two-bedroom space for everyone.',
-  blocks: [['cards', { items: [
-    { scene: 'photo-superior', h: 'Superior', p: 'Everything you need for a comfortable Hua Hin stay.', href: 'superior.html', cta: 'View Room' },
-    { scene: 'photo-room-premier', h: 'Premier High Floor', p: 'More light, open views and a little distance from the everyday.', href: 'premier-high-floor.html', cta: 'View Room' },
-    { scene: 'photo-jacuzzi', h: 'Jacuzzi Deluxe', p: 'A spacious room with a private Jacuzzi made for slower moments together.', href: 'jacuzzi-deluxe.html', cta: 'View Jacuzzi Deluxe' },
-    { scene: 'scene-family', h: 'Family Jacuzzi 2 Bedroom Suite', p: 'A two-bedroom suite made for families and friends.', href: 'two-bedroom-suite.html', cta: 'View Two-Bedroom Suite' },
-    { scene: 'photo-duplex', h: 'Duplex Suite', p: 'A two-level suite with floor-to-ceiling windows and a stone staircase.', href: 'duplex-suite.html', cta: 'View Duplex Suite' },
-  ] }]],
+  blocks: [['cards', { items: ROOM_CARDS.map(({ slug, ...c }) => ({ ...c, href: slug + '.html' })) }]],
 };
 
 /* ---------- Experiences ---------- */

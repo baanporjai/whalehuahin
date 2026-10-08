@@ -91,7 +91,7 @@ p{margin:0 0 1em}
 .booking-open,.booking-close{display:none}
 
 /* Sections */
-.section{padding:clamp(72px,10vw,140px) var(--gut);max-width:calc(var(--max) + 2*var(--gut));margin:0 auto}
+.section{padding:clamp(44px,6.5vw,96px) var(--gut);max-width:calc(var(--max) + 2*var(--gut));margin:0 auto}
 .section-head{margin-bottom:48px}
 .section-foot{margin-top:48px;text-align:center}
 
@@ -268,7 +268,7 @@ p{margin:0 0 1em}
 .amenity-group ul{list-style:none;margin:0;padding:0}
 .amenity-group li{padding:5px 0 5px 22px;position:relative;color:var(--muted)}
 .amenity-group li::before{content:"";position:absolute;left:3px;top:.85em;width:6px;height:6px;border-radius:50%;background:var(--teal)}
-.band-cta{text-align:center;padding:72px var(--gut) 96px}
+.band-cta{text-align:center;padding:clamp(44px,6vw,72px) var(--gut) clamp(56px,7vw,96px)}
 .band-cta p{font:600 clamp(1.8rem,3.4vw,2.6rem) var(--f-display);margin-bottom:.8em}
 .steps{list-style:none;counter-reset:s;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .steps li{counter-increment:s;border-top:2px solid var(--aqua);padding-top:18px}
@@ -340,6 +340,7 @@ p{margin:0 0 1em}
   .gallery{grid-template-columns:1fr 1fr}
   .photo-band .media{aspect-ratio:4/3}
   .spec div{flex-direction:column;gap:2px}
+  .spec dt{flex:none}
   .page-hero{padding-top:110px}
   .sticky-bar{display:grid;grid-template-columns:1fr 1fr 1.4fr;align-items:center;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;padding:10px 14px;box-shadow:0 -4px 20px rgba(10,45,49,.12)}
   .sticky-bar a:not(.btn){text-align:center;font-weight:600;text-decoration:none;padding:.6em}
@@ -461,3 +462,6 @@ html[lang="ru"] .hero h1{font-size:clamp(3rem,9vw,8rem)}
 .remark{max-width:640px;margin-top:22px;padding:18px 22px;border-left:4px solid var(--aqua);background:#fff;border-radius:0 16px 16px 0;box-shadow:0 10px 26px rgba(10,45,49,.06)}
 .remark-title{font:600 .72rem var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 .4em}
 .remark p:last-child{margin:0;color:var(--muted);font-size:.98rem}
+/* A short text block followed directly by another section (e.g. the room intro above its gallery): keep the two close instead of stacking two full section paddings */
+.section.prose:has(+ .section){padding-bottom:clamp(20px,3.5vw,44px)}
+.section.prose + .section{padding-top:clamp(20px,3.5vw,44px)}
