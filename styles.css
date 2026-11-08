@@ -102,6 +102,9 @@ p{margin:0 0 1em}
 .tiles li{position:relative;aspect-ratio:3/4;border-radius:22px;overflow:hidden;color:#fff}
 .tiles img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
 .tiles li:hover img{transform:scale(1.05)}
+.tiles a{position:absolute;inset:0;display:block;color:inherit;text-decoration:none}
+.tiles li::after{pointer-events:none}
+.tiles a:focus-visible{outline-offset:-6px;border-radius:22px}
 .tiles li::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,45,49,.82),rgba(10,45,49,0) 55%)}
 .tiles div{position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2}
 .tiles h3{font-size:1.5rem;margin-bottom:.25em}
